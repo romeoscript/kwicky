@@ -26,28 +26,18 @@ const Stepper: React.FC = () => {
         setCurrent(current + 1);
     };
 
-    const prev = () => {
-        setCurrent(current - 1);
-    };
+
 
     const items = steps.map((item) => ({ key: item.title, title: item.title }));
 
-    const contentStyle: React.CSSProperties = {
-        lineHeight: '260px',
-        textAlign: 'center',
-        color: token.colorTextTertiary,
-        backgroundColor: token.colorFillAlter,
-        borderRadius: token.borderRadiusLG,
-        border: `1px dashed ${token.colorBorder}`,
-        marginTop: 16,
-    };
+    
 
     return (
         <>
             <div className='flex gap-4 justify-between p-[1.5rem]'>
                 <aside className='basis-[59%]'>
                     <Steps current={current} items={items} />
-                    <div style={contentStyle}>{steps[current].content}</div>
+                    <div>{steps[current].content}</div>
 
                 </aside>
                 <aside className='basis-[39%] max-w-[500px] text-black font-bold'>
