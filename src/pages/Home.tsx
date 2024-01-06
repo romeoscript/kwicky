@@ -12,11 +12,11 @@ const Home = () => {
         <Layout>
             <Hero />
             <Addcarousel />
-            <div className='px-[3rem] flex justify-between'>
-                <p className='font-bold text-black text-2xl my-[1.5rem]'>Electronics & Gadgets</p>
+            <div className='px-[3rem] flex  items-center justify-between'>
+                <p className='font-bold text-black md:text-2xl my-[1.5rem]'>Electronics & Gadgets</p>
                 <p>veiw all</p>
             </div>
-            <div className='mb-[3rem] grid grid-cols-4 gap-2 p-[1rem] place-items-center'>
+            <div className='mb-[3rem] grid md:grid-cols-4 gap-[10%] grid-cols-2 gap-2 p-[1rem] place-items-center'>
                 <Link to='/product/2'>
                     <ProductCard name="Oculus Control"
                         img={oculus}
@@ -41,16 +41,20 @@ const Home = () => {
                     rating={4}
                     total={120} />
             </div>
-            <div className='px-[3rem] flex justify-between'>
-                <p className='font-bold text-black text-2xl my-[1.5rem]'>Electronics & Gadgets</p>
+            <div className='px-[3rem] flex  items-center justify-between'>
+                <p className='font-bold text-black md:text-2xl my-[1.5rem]'>Electronics & Gadgets</p>
                 <p>veiw all</p>
             </div>
-            <div className='mb-[3rem] grid grid-cols-4 gap-2 p-[1rem] place-items-center'>
-                <ProductCard name="Oculus Control"
-                    img={oculus}
-                    price={180}
-                    rating={4}
-                    total={120} />
+           
+            <div className='mb-[6rem] grid md:grid-cols-4 gap-[10%] grid-cols-2 gap-2 p-[1rem] place-items-center'>
+                <Link to='/product/2'>
+                    <ProductCard name="Oculus Control"
+                        img={oculus}
+                        price={180}
+                        rating={4}
+                        total={120}
+                    />
+                </Link>
                 <ProductCard name="Oculus Control"
                     img={oculus}
                     price={180}
@@ -67,7 +71,6 @@ const Home = () => {
                     rating={4}
                     total={120} />
             </div>
-
 
         </Layout>
     )

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, message, Steps, theme } from 'antd';
 import oculus from '../assets/oculus.svg'
 import Address from './Address';
+import Card from './Card';
 
 const steps = [
     {
@@ -10,7 +11,7 @@ const steps = [
     },
     {
         title: 'Second',
-        content: 'Second-content',
+        content: <Card />,
     },
     {
         title: 'Last',

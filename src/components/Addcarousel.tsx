@@ -30,13 +30,13 @@ const Addcarousel = () => {
     const images = [add, add1, add2,];
 
     return (
-        <div className='w-[80%] my-[4rem] m-auto bg-white p-[1rem]' >
+        <div className='md:w-[80%] md:my-[4rem] my-[2rem] m-auto bg-white p-[1rem]' >
             <Carousel responsive={responsive} autoPlay={true} autoPlaySpeed={2000}  showDots={true} infinite={true}>
                 {images.map((src, index: number) => (
                     <div
                         key={index}
                         
-                        className='relative  cursor-pointer z-100 h-[380px] w-full'
+                        className='relative  cursor-pointer z-100 md:h-[380px] h-[500px] w-full'
                     >
                         <img src={src} className=' h-full w-full rounded-[20px] object-cover' alt="" />
                        

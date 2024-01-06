@@ -31,18 +31,18 @@ const ProductCard: React.FC<cardprops> = ({ name, img, price, rating, total }) =
     };
 
     return (
-        <div className='w-[310px] rounded-[20px] h-[500px] bg-white relative '>
+        <div className='md:w-[310px] w-[185px] rounded-[20px] md:h-[500px]  h-[360px] bg-white relative '>
             <img src={ali} alt="" className="absolute top-4 z-30 left-6" />
             <figure className='h-[45%] '></figure>
             <img src={img} alt="" className='absolute top-0 h-[78%] object-cover rounded-[20px]  z-2' />
             <figure className=' curvy z-20 relative rounded-[20px] flex items-left justify-end flex-col p-[1rem]'>
                 <p className="font-bold text xl">{name}</p>
 
-                <p className="flex items-center text-xl text-[yellow]">
+                <p className="flex items-center md:text-xl  text-[yellow]">
                     {renderStars(rating)}
                     <span className="text-white">({total})</span></p>
-                <h2 className="text-4xl font-bold">${price}</h2>
-                <Button className='w-[90%] button_linear my-[1rem] mx-auto block h-[50px]' type="primary">Add to Cart</Button>
+                <h2 className="md:text-4xl font-bold">${price}</h2>
+                <Button className='w-[90%] button_linear my-[1rem] mx-auto block md:h-[50px] ' type="primary">Add to Cart</Button>
             </figure>
         </div>
     )

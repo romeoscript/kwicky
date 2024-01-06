@@ -16,11 +16,11 @@ const responsive = {
     },
     tablet: {
         breakpoint: { max: 1024, min: 464 },
-        items: 2
+        items: 3
     },
     mobile: {
         breakpoint: { max: 464, min: 0 },
-        items: 1
+        items: 3
     }
 };
 
@@ -36,7 +36,7 @@ const Carousels = () => {
                         key={index}
                         onMouseEnter={() => setHovered(index)}
                         onMouseLeave={() => setHovered(null)}
-                        className='relative  cursor-pointer z-100 h-[180px] w-[180px]'
+                        className='relative  cursor-pointer z-100 md:h-[180px] h-[110px] md:w-[180px]  w-[110px]'
                     >
                         <img src={src} className=' h-full w-full rounded-[20px] object-cover' alt="" />
                         {hovered === index && (
