@@ -12,18 +12,18 @@ const Cart = () => {
 
                 <aside className='flex items-start justify-between p-[2rem] border-2'>
                     <figure className='flex items-center gap-4 '>
-                        <img src={oculus} alt="" className='w-[150px] h-[150px] rounded-xl object-cover' />
-                        <aside className='font-bold text-black capitalize'>
+                        <img src={oculus} alt="" className='md:w-[150px] md:h-[150px] h-[80px] w-[80px] rounded-xl object-cover' />
+                        <aside className='font-bold text-black capitalize '>
                             oculus control  <br />
-                            <span className='text-3xl'>$180</span>
+                            <span className='md:text-3xl'>$180</span>
                         </aside>
                     </figure>
                     <figure>
                         <p className='text-right px-[1rem] text-[blue] cursor-pointer'>Remove</p>
                     <aside className=' flex gap-4 p-[1rem]'>
                         <Button type="primary" className='h-[60px] bg-gray-500 important rounded-md ' icon={<MinusOutlined />} />
-                        <input type="text" placeholder="Type here" className="input rounded-md bg-white input-bordered input-primary w-[60px] h-[60px] max-w-xs" />
-                        <Button type="primary" className='w-[60px] h-[60px] bg-[#01183C] important rounded-md' icon={<PlusOutlined />} />
+                        <input type="text"  className="input rounded-md bg-white input-bordered input-primary w-[30px] text-center p-0 h-[30px] md:w-[60px] md:h-[60px] max-w-xs" />
+                        <Button type="primary" className='md:w-[60px] md:h-[60px] bg-[#01183C] important rounded-md' icon={<PlusOutlined className='text-xs' />} />
                     </aside>
                     </figure>
                 </aside>
@@ -35,7 +35,33 @@ const Cart = () => {
 
                 </aside>
             </div>
-            <div className='my-[3rem] grid grid-cols-4 gap-[2%] w-full overflow-auto p-[1rem] place-items-center'>
+            <div className='my-[3rem] grid md:grid-cols-4 grid-cols-2 md:gap-[2%] gap-8 w-full overflow-auto p-[1rem] place-items-center'>
+        <ProductCard name="Oculus Control"
+          img={oculus}
+          price={180}
+          rating={4}
+          total={120}
+        />
+        <ProductCard name="Oculus Control"
+          img={oculus}
+          price={180}
+          rating={4}
+          total={120}
+        />
+        <ProductCard name="Oculus Control"
+          img={oculus}
+          price={180}
+          rating={4}
+          total={120}
+        />
+        <ProductCard name="Oculus Control"
+          img={oculus}
+          price={180}
+          rating={4}
+          total={120}
+        />
+      </div>
+            {/* <div className='my-[3rem] grid grid-cols-4 gap-[2%] w-full overflow-auto p-[1rem] place-items-center'>
                 <ProductCard name="Oculus Control"
                     img={oculus}
                     price={180}
@@ -84,7 +110,7 @@ const Cart = () => {
                     rating={4}
                     total={120}
                 />
-            </div>
+            </div> */}
         </Layout>
     )
 }

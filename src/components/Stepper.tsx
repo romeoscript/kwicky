@@ -35,7 +35,7 @@ const Stepper: React.FC = () => {
 
     return (
         <>
-            <div className='flex gap-4 justify-between p-[1.5rem]'>
+            <div className='md:flex gap-4 justify-between p-[1.5rem]'>
                 <aside className='basis-[59%]'>
                     <Steps current={current} items={items} />
                     <div>{steps[current].content}</div>

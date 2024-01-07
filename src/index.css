@@ -41,6 +41,13 @@ h1 {
   width: 60px!important;
 }
 
+@media (max-width:500px) {
+  .important{
+    width: 30px!important;
+    height: 30px!important;
+  }
+}
+
 .ant-select-selector{
   padding: 1.2rem!important;
 }
