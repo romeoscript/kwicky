@@ -1,5 +1,5 @@
 
-import React from 'react'
+
 import Layout from '../components/Layout'
 import Searchfilter from '../components/Searchfilter'
 import ProductCard from '../components/ProductCard'

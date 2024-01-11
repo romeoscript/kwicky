@@ -1,5 +1,5 @@
-import React from 'react'
-import { Space, Select, Input } from 'antd'
+
+import {  Select, Input } from 'antd'
 
 const Card = () => {
     const handleChange = (value: string) => {

@@ -4,8 +4,6 @@ import "react-multi-carousel/lib/styles.css";
 import add from '../assets/add.svg'
 import add1 from '../assets/add1.svg'
 import add2 from '../assets/add2.svg'
-import axios from 'axios';
-import { useEffect, useState } from 'react';
 import useFetch from '../hooks/useFetch'
 
 

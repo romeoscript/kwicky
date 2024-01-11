@@ -1,4 +1,4 @@
-import React from 'react'
+
 import Layout from '../components/Layout'
 import ProductCard from '../components/ProductCard'
 import oculus from '../assets/oculus.svg'
