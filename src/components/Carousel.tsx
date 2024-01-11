@@ -24,20 +24,20 @@ const responsive = {
     }
 };
 
-type CategoryProps ={
-    image:string;
-    name:string;
+type CategoryProps = {
+    image: string;
+    name: string;
     id: number;
 }
 
 const Carousels = () => {
-    const { data, isLoading } = useFetch<CategoryProps[]>('https://api.kwick.ng/api/v1/category');
+    const { data } = useFetch<CategoryProps[]>('https://api.kwick.ng/api/v1/category');
     const [hovered, setHovered] = useState<number | null>(null);
-    const images = [hoverphone, hovercloth, hoverimage, hoverimage, hoverimage, hoverimage, hoverimage, hoverimage, hoverimage];
+    // const images = [hoverphone, hovercloth, hoverimage, hoverimage, hoverimage, hoverimage, hoverimage, hoverimage, hoverimage];
 
     return (
         <div className='w-[90%] m-auto bg-white' >
-            <Carousel responsive={responsive} autoPlay={true} autoPlaySpeed={2000} infinite={true} >
+            {data && data.length > 0 && <Carousel responsive={responsive} autoPlay={true} autoPlaySpeed={2000} infinite={true} >
                 {data?.map((src, index: number) => (
                     <div
                         key={index}
@@ -55,7 +55,7 @@ const Carousels = () => {
                         )}
                     </div>
                 ))}
-            </Carousel>
+            </Carousel>}
         </div>
     )
 }
