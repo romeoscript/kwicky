@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import Carousel from 'react-multi-carousel'
 import "react-multi-carousel/lib/styles.css";
-import hoverphone from '../assets/hoverphone.svg'
-import hovercloth from '../assets/hovercloth.svg'
-import hoverimage from '../assets/hover image.svg'
 import { FaArrowRightLong } from "react-icons/fa6";
 import useFetch from '../hooks/useFetch';
 
