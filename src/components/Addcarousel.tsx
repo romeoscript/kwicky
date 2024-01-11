@@ -1,9 +1,9 @@
 
 import Carousel from 'react-multi-carousel'
 import "react-multi-carousel/lib/styles.css";
-import add from '../assets/add.svg'
+
 import add1 from '../assets/add1.svg'
-import add2 from '../assets/add2.svg'
+
 import useFetch from '../hooks/useFetch'
 
 
@@ -40,7 +40,7 @@ const Addcarousel = () => {
     }
     console.log(data);
 
-    const images = [add, add1, add2,];
+    //const images = [add, add1, add2,];
 
     return (
         <div className='md:w-[80%] md:my-[4rem] my-[2rem] m-auto bg-white p-[1rem]' >
