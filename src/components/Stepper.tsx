@@ -20,7 +20,7 @@ const steps = [
 ];
 
 const Stepper: React.FC = () => {
-   // const { token } = theme.useToken();
+    // const { token } = theme.useToken();
     const [current, setCurrent] = useState(0);
 
     const next = () => {
@@ -31,7 +31,7 @@ const Stepper: React.FC = () => {
 
     const items = steps.map((item) => ({ key: item.title, title: item.title }));
 
-    
+
 
     return (
         <>

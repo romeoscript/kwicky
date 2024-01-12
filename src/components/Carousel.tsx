@@ -45,7 +45,7 @@ const Carousels = () => {
                         <img src={src.image} className=' h-full w-full rounded-[20px] object-cover' alt="" />
                         {hovered === index && (
                             <div className='linear absolute rounded-[20px] bottom-0 h-full bg-[green] flex items-center justify-end pb-[1rem] flex-col  w-full'>
-                                <p className='  text-center  text-white bg-opacity-75 md:text-3xl'> {src.name.length > 10 ? `${src.name.substring(0, 10)}...` : src.name}</p>
+                                <p className='  text-center  text-white bg-opacity-75 md:text-xl'> {src.name.length > 10 ? `${src.name.substring(0, 10)}...` : src.name}</p>
                                 <p className='abolute bottom-0 flex items-center gap-3'>view all <FaArrowRightLong /></p>
                             </div>
 

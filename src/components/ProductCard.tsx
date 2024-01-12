@@ -31,17 +31,22 @@ const ProductCard: React.FC<cardprops> = ({ name, img, price, rating, total }) =
     };
 
     return (
-        <div className='md:w-[310px] w-[185px] rounded-[20px] md:h-[500px]  h-[360px] bg-white relative '>
-            <img src={ali} alt="" className="absolute top-4 z-30 left-6" />
-            <figure className='h-[45%] '></figure>
-            <img src={img} alt="" className='absolute top-0 h-[78%] object-cover rounded-[20px]  z-2' />
-            <figure className=' curvy z-20 relative rounded-[20px] flex items-left justify-end flex-col p-[1rem]'>
-                <p className="font-bold text xl">{name}</p>
+        <div className='md:w-[300px] w-[185px] rounded-[20px] md:h-[450px]  h-[340px] bg-white relative '>
+            {/* //<img src={ali} alt="" className="absolute top-4 z-30 left-6" /> */}
+            <figure className='h-[45%] '>
 
-                <p className="flex items-center md:text-xl  text-[yellow]">
-                    {renderStars(rating)}
-                    <span className="text-white">({total})</span></p>
-                <h2 className="md:text-4xl font-bold">${price}</h2>
+            </figure>
+            <div className="absolute top-0 h-[75%] rounded-t-[20px] ">
+                <img src={img} alt="" className='  h-full w-full aspect-w-2 rounded-t-[20px] aspect-h-0 z-2 aspect-w' />
+            </div>
+
+            <figure className=' curvy z-20 relative rounded-[20px] flex items-left justify-end flex-col p-[1rem]'>
+                <p className="font-bold ">{name.length > 25? `${name.substring(0,27)}...`:name }</p>
+
+                {/* <p className="flex items-center md:text-l  text-[yellow]"> */}
+                    {/* {renderStars(rating)} */}
+                    {/* <span className="text-white">({total})</span></p> */}
+                <h2 className="md:text-xl font-bold">&#8358;{price}</h2>
                 <Button className='w-[90%] button_linear my-[1rem] mx-auto block md:h-[50px] ' type="primary">Add to Cart</Button>
             </figure>
         </div>
