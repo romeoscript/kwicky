@@ -41,7 +41,7 @@ const ProductCard: React.FC<cardprops> = ({ name, img, price, rating, total }) =
             </div>
 
             <figure className=' curvy z-20 relative rounded-[20px] flex items-left justify-end flex-col p-[1rem]'>
-                <p className="font-bold ">{name.length > 25? `${name.substring(0,27)}...`:name }</p>
+                <p className="font-bold ">{name.length > 25? `${name.trim().substring(0,25)}...`:name.trim() }</p>
 
                 {/* <p className="flex items-center md:text-l  text-[yellow]"> */}
                     {/* {renderStars(rating)} */}

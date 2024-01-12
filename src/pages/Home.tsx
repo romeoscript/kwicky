@@ -52,8 +52,8 @@ const Home: React.FC = () => {
                                     name={product.name}
                                     img={product.image1}
                                     price={product.price}
-                                    rating={4} // Assuming a fixed rating for now
-                                    total={120} // Assuming a fixed total for now
+                                    rating={4} 
+                                    total={120} 
                                 />
                             </Link>
                         ))}
