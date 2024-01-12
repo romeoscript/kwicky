@@ -7,42 +7,55 @@ import filled2 from '../assets/Frame 472.svg'
 import { Button } from "antd"
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { useParams } from "react-router-dom"
+import useFetch from "../hooks/useFetch"
 
-
+interface Product {
+  id: number;
+  name: string;
+  get_image: string;
+  image1: string;
+  image2: string;
+  image3: string;
+  price: string;
+  category: number;
+  description:string;
+  // ... any other properties that a product might have
+}
 
 const Productpage = () => {
+  const { id } = useParams()
+  const { data: product } = useFetch<Product>(`https://api.kwick.ng/api/v1/product/${id}`)
+  console.log(id, product);
+  const imageurls = product ? [product.get_image, product.image1, product.image2, product.image3] : [];
+  const imageElements = imageurls.slice(0, 3).map((url, index) => (
+    <aside className="flex-1" key={index}>
+      <img src={url} className="md:h-full" alt={`Product Image ${index + 1}`} />
+    </aside>
+  ));
+
+  const mainImage = imageurls.map((url, index) => (
+    <div key={index}>
+      <img src={url} className="md:h-[500px] h-[300px] object-cover w-full rounded-md" alt="" />
+    </div>
+  ))
+
   return (
     <Layout>
       <div className="pt-[100px]">
         <aside className="grid md:grid-cols-2 gap-4 m-[2rem] ">
           <figure className=" min-h-[500px]  grid md:grid-cols-[1fr_3fr] gap-4 ">
-            <div className="flex md:flex-col md:h-[500px] gap-4 order-2">
-              <aside className=" flex-1">
-                <img src={oculus} className="md:h-full" alt="" />
-              </aside>
-              <aside className=" flex-1">
-                <img src={oculus} className="md:h-full" alt="" />
-              </aside>
-              <aside className=" flex-1 ">
-                <img src={oculus} className="md:h-full rounded-md" alt="" />
-              </aside>
+            <div className="flex md:flex-col md:h-[500px] gap-4 max-md:order-2">
+              {imageElements}
             </div>
-            <div className="h-full order-1 ">
-              <div className="md:hidden">
+            <div className="h-full max-md:order-1 ">
+              <div className="">
                 <Carousel showArrows={true} showThumbs={false} autoPlay={true} interval={3000} showStatus={false} infiniteLoop={true}>
-                  <div>
-                    <img src={oculus} className="h-[300px] object-cover w-full rounded-md" alt="" />
-                  </div>
-                  <div>
-                    <img src={oculus} className="h-[300px] object-cover w-full rounded-md" alt="" />
-                  </div>
-                  <div>
-                    <img src={oculus} className="h-[300px] object-cover w-full rounded-md" alt="" />
-                  </div>
+
+                  {mainImage}
                 </Carousel>
               </div>
 
-              <img src={oculus} className="h-[500px] object-cover w-full max-md:hidden rounded-md" alt="" />
               <Button
                 type="primary"
                 className="bg-[#01183C] h-[40px] block w-full mx-auto my-[1rem] max-md:hidden"
@@ -51,24 +64,19 @@ const Productpage = () => {
               </Button>
             </div>
             <Button
-                type="primary"
-                className="bg-[#01183C] h-[40px] order-3 block w-full mx-auto my-[1rem]"
-              >
-                Add to Cart
-              </Button>
+              type="primary"
+              className="bg-[#01183C] h-[40px] md:hidden order-3 block w-full mx-auto my-[1rem]"
+            >
+              Add to Cart
+            </Button>
           </figure>
 
 
           <figure className=" min-h-[50px] md:w-[90%]  mx-auto">
             <h1 className="text-2xl font-bold my-[1rem]">Product Description </h1>
-            <h1 className="text-xl">Oculu Control</h1>
-            <p>Developed by Oculus VR, a subsidiary of Meta Platforms, Inc., the Oculus offers an unparalleled VR experience by combining advanced optics, precise motion tracking, and intuitive controls.
-              With high-resolution displays and a wide field of view, the Oculus delivers stunning visuals that transport users to virtual worlds with lifelike detail. The headset's integrated sensors and tracking technology enable precise movement detection, allowing users to explore and interact with their virtual surroundings seamlessly.
-              Equipped with ergonomic design features, the Oculus ensures comfort during extended use, making it suitable for a variety of VR applications, from gaming and entertainment to educational and professional purposes. The device often comes with hand controllers that enable users to manipulate objects in the virtual space with natural and intuitive movements.
-            </p>
+            <h1 className="text-xl">{product?.name}</h1>
+            <p>{product?.description} </p>
           </figure>
-
-
         </aside>
 
 
