@@ -8,7 +8,10 @@ import { Button } from "antd"
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useParams } from "react-router-dom"
+import { useEffect } from "react"
 import useFetch from "../hooks/useFetch"
+import useRecentlyViewedProducts from "../hooks/useRecent"
+import Recents from "../components/Recents"
 
 interface Product {
   id: number;
@@ -20,13 +23,25 @@ interface Product {
   price: string;
   category: number;
   description: string;
-  // ... any other properties that a product might have
 }
 
 const Productpage = () => {
   const { id } = useParams()
   const { data: product } = useFetch<Product>(`https://api.kwick.ng/api/v1/product/${id}`)
-  console.log(id, product);
+
+  const { addProduct } = useRecentlyViewedProducts()
+
+  console.log(product);
+
+  useEffect(() => {
+    if (product) {
+      addProduct(product);
+    }
+  }, [product, addProduct]);
+  
+  // console.log(id, product);
+
+
   const imageurls = product ? [product.get_image, product.image1, product.image2, product.image3] : [];
   const imageElements = imageurls.slice(0, 3).map((url, index) => (
     <aside className="flex-1" key={index}>
@@ -78,7 +93,6 @@ const Productpage = () => {
           </figure>
         </aside>
 
-
       </div>
 
       <div className="flex items-center max-md:flex-col gap-4 w-[95%] my-[4rem] m-auto">
@@ -97,32 +111,8 @@ const Productpage = () => {
         </aside>
 
       </div>
-      <div className='my-[3rem] grid md:grid-cols-4 grid-cols-2 md:gap-[2%] gap-8 w-full overflow-auto p-[1rem] place-items-center'>
-        <ProductCard name="Oculus Control"
-          img={oculus}
-          price={180}
-          rating={4}
-          total={120}
-        />
-        <ProductCard name="Oculus Control"
-          img={oculus}
-          price={180}
-          rating={4}
-          total={120}
-        />
-        <ProductCard name="Oculus Control"
-          img={oculus}
-          price={180}
-          rating={4}
-          total={120}
-        />
-        <ProductCard name="Oculus Control"
-          img={oculus}
-          price={180}
-          rating={4}
-          total={120}
-        />
-      </div>
+
+      {/* <Recents /> */}
     </Layout>
   )
 }

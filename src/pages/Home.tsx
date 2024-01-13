@@ -47,16 +47,16 @@ const Home: React.FC = () => {
                     </div>
                     <div className='mb-[3rem] grid md:grid-cols-4 gap-4 grid-cols-2 gap-2 p-[1rem] place-items-center'>
                         {products.map((product: Product) => (
-
-                            <ProductCard
-                                id={product.id}
-                                name={product.name}
-                                img={product.image1}
-                                price={product.price}
-                                rating={4}
-                                total={120}
-                            />
-
+                            <Link to={`/product/${product.id}`} key={product.id}>
+                                <ProductCard
+                                    id={product.id}
+                                    name={product.name}
+                                    img={product.image1}
+                                    price={product.price}
+                                    rating={4}
+                                    total={120}
+                                />
+                            </Link>
                         ))}
                     </div>
                 </React.Fragment>

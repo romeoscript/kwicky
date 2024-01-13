@@ -55,7 +55,7 @@ const ProductCard: React.FC<cardprops> = ({id, name, img, price, rating, total }
                     {/* {renderStars(rating)} */}
                     {/* <span className="text-white">({total})</span></p> */}
                 <h2 className="md:text-xl font-bold">&#8358;{price}</h2>
-                <Button className='w-[90%] button_linear my-[1rem] mx-auto block md:h-[50px] ' type="primary" onClick={handleAddToCart}>Add to Cart</Button>
+                {/* <Button className='w-[90%] button_linear my-[1rem] mx-auto block md:h-[50px] ' type="primary" onClick={handleAddToCart}>Add to Cart</Button> */}
             </figure>
         </div>
     )
