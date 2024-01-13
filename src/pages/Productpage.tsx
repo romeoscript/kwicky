@@ -19,7 +19,7 @@ interface Product {
   image3: string;
   price: string;
   category: number;
-  description:string;
+  description: string;
   // ... any other properties that a product might have
 }
 
@@ -70,7 +70,6 @@ const Productpage = () => {
               Add to Cart
             </Button>
           </figure>
-
 
           <figure className=" min-h-[50px] md:w-[90%]  mx-auto">
             <h1 className="text-2xl font-bold my-[1rem]">Product Description </h1>

@@ -1,11 +1,13 @@
 import { CiStar } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
 import { IoMdStarHalf } from "react-icons/io";
-import ali from '../assets/ali.svg'
+
 import { Button } from 'antd'
 import React from "react";
+import { useCart } from "../context/cartContext";
 
 interface cardprops {
+    id:number
     name: string;
     img: string;
     price: number;
@@ -13,8 +15,14 @@ interface cardprops {
     total: number;
 }
 
-const ProductCard: React.FC<cardprops> = ({ name, img, price, rating, total }) => {
-    console.log(rating);
+const ProductCard: React.FC<cardprops> = ({id, name, img, price, rating, total }) => {
+    const { addToCart } = useCart();
+
+  const handleAddToCart = () => {
+    const product = { id,name, img, price, rating, total }; 
+    addToCart(product);
+  };
+    
 
     const renderStars = (rating: number) => {
         let stars = [];
@@ -47,7 +55,7 @@ const ProductCard: React.FC<cardprops> = ({ name, img, price, rating, total }) =
                     {/* {renderStars(rating)} */}
                     {/* <span className="text-white">({total})</span></p> */}
                 <h2 className="md:text-xl font-bold">&#8358;{price}</h2>
-                <Button className='w-[90%] button_linear my-[1rem] mx-auto block md:h-[50px] ' type="primary">Add to Cart</Button>
+                <Button className='w-[90%] button_linear my-[1rem] mx-auto block md:h-[50px] ' type="primary" onClick={handleAddToCart}>Add to Cart</Button>
             </figure>
         </div>
     )

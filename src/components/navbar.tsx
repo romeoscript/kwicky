@@ -12,8 +12,11 @@ import { Input } from 'antd';
 import { RiSearch2Line } from "react-icons/ri";
 import { useState } from 'react';
 import { motion } from 'framer-motion'
+import { useCart } from '../context/cartContext';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
+    const { cartItems } = useCart()
     const [mobile, setMobile] = useState(false)
 
     const showMobile = () => {
@@ -76,8 +79,8 @@ const Navbar = () => {
                         </li>
 
                         <li className='max-md:hidden' ><a> <BiSupport />Support</a></li>
-                        <li className='bg-[#01183C] text-white rounded-md '><a><IoCartOutline />Cart</a></li>
-
+                        <Link to='/cart'> <li className='bg-[#01183C] text-white rounded-md '><a><IoCartOutline />Cart {cartItems.length} </a></li>
+                        </Link>
 
                         <li className='ml-[3.5rem] max-md:hidden'>
                             <details>
@@ -95,13 +98,13 @@ const Navbar = () => {
 
             </div>
             {mobile &&
-                <motion.div 
-                initial="hidden"
-                animate="visible"
-                exit='hidden'
-                variants={mobileMenuVariants}
-                transition={{duration: 0.3}}
-                className=' bg-[blue] flex flex-col gap-8 text-white absolute w-full  p-[1.5rem]' style={{ zIndex: 200 }}>
+                <motion.div
+                    initial="hidden"
+                    animate="visible"
+                    exit='hidden'
+                    variants={mobileMenuVariants}
+                    transition={{ duration: 0.3 }}
+                    className=' bg-[blue] flex flex-col gap-8 text-white absolute w-full  p-[1.5rem]' style={{ zIndex: 200 }}>
                     <div className='flex items-center justify-between gap-2 mb-[1rem]'>
                         <a className="btn btn-ghost text-xl">    <img src={logo} className='h-[60px]' alt="" /></a>
                         <IoMdClose className="text-2xl cursor-pointer" onClick={showMobile} />
