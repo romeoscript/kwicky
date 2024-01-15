@@ -48,7 +48,7 @@ const Cart = () => {
 
     const total = cartItems.reduce((sum, product) => {
 
-        return sum + parseFloat(product.price); // Directly use price as a number
+        return sum + parseFloat(product?.price); // Directly use price as a number
     }, 0);
 
     console.log(total);
@@ -59,7 +59,7 @@ const Cart = () => {
                 {Object.values(aggregatedCartItems).map((item, index) => (
                     <aside className='flex items-start justify-between p-[2rem] border-2' key={index}>
                         <figure className='flex items-center gap-4'>
-                            <img src={item.img} alt="" className='md:w-[150px] md:h-[150px] h-[80px] w-[80px] rounded-xl object-cover' />
+                            <img src={item.image1} alt="" className='md:w-[150px] md:h-[150px] h-[80px] w-[80px] rounded-xl object-cover' />
                             <aside className='font-bold text-black capitalize'>
                                 {item.name} <br />
                                 <span className='md:text-3xl'>&#8358;{item.price}</span>
@@ -80,8 +80,15 @@ const Cart = () => {
                     <p className='flex justify-between'><span>Subtotal</span> <span>${total}</span></p>
                     <p className='border-b-2 border-t-2 my-[0.7rem] flex justify-between'><span>Shipping fee</span> <span>free</span></p>
                     <p className='flex justify-between font-bold text-black'><span>Total</span> <span>${total}</span></p>
-
+                    <Button
+                type="primary"
+                className="bg-[#01183C] h-[40px] block w-full mx-auto my-[1rem] max-md:hidden"
+              
+              >
+               checkout 
+              </Button>
                 </aside>
+                
             </div> :
                 <div className='pt-[100px] mb-[2rem] flex items-center shadow-md ' >
                     <img src={cartimg} className=' md:h-[400px] md:w-[50%] m-auto' alt="" />

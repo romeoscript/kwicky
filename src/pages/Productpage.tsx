@@ -1,6 +1,4 @@
 import Layout from "../components/Layout"
-import ProductCard from '../components/ProductCard'
-import oculus from '../assets/oculus.svg'
 import filled from '../assets/Filled.svg'
 import filled1 from '../assets/Filled (1).svg'
 import filled2 from '../assets/Frame 472.svg'
@@ -8,10 +6,11 @@ import { Button } from "antd"
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useParams } from "react-router-dom"
-import { useEffect } from "react"
+import { useCart } from "../context/cartContext"
+import { PlusOutlined, MinusOutlined } from '@ant-design/icons';
 import useFetch from "../hooks/useFetch"
 import useRecentlyViewedProducts from "../hooks/useRecent"
-import Recents from "../components/Recents"
+
 
 interface Product {
   id: number;
@@ -20,20 +19,50 @@ interface Product {
   image1: string;
   image2: string;
   image3: string;
-  price: string;
+  price: number;
+  img: string;
+  total: number;
+  rating: number;
   category: number;
   description: string;
+  quantity: number;
 }
-
+interface AggregatedCartItem extends Product {
+  quantity: number;
+}
 const Productpage = () => {
   const { id } = useParams()
   const { data: product } = useFetch<Product>(`https://api.kwick.ng/api/v1/product/${id}`)
+  const { cartItems, addToCart, removeFromCart, decreaseQuantity } = useCart()
 
-  const { addProduct } = useRecentlyViewedProducts()
+  const handleAddToCart = (item: Product) => {
+    addToCart(item)
+  }
+  const handleRemoveFromCart = (item: Product) => {
+    removeFromCart(item)
+  }
+  const handleDecreaseQuantity = (item: Product) => {
+    decreaseQuantity(item);
+  };
 
-  console.log(product);
 
-  // console.log(id, product);
+
+  console.log(cartItems);
+
+  const foundItem = cartItems.find(item => item.id === product?.id);
+
+  console.log(foundItem, product?.id);
+
+  const aggregatedCartItems: Record<number, AggregatedCartItem> = cartItems.reduce((acc: Record<number, AggregatedCartItem>, item: Product) => {
+    if (acc[item.id]) {
+      acc[item.id].quantity += 1;
+    } else {
+      acc[item.id] = { ...item, quantity: 1 };
+    }
+    return acc;
+  }, {});
+
+
 
 
   const imageurls = product ? [product.get_image, product.image1, product.image2, product.image3] : [];
@@ -64,24 +93,44 @@ const Productpage = () => {
                   {mainImage}
                 </Carousel>
               </div>
-             
-              <Button
+              {foundItem ? <> {Object.values(aggregatedCartItems).map((item, index) => (
+                <figure key={index}>
+                   <aside className='flex gap-4 p-[1rem] max-md:hidden'>
+                    <Button type="primary" className='h-[60px] bg-gray-500 important rounded-md' onClick={() => handleDecreaseQuantity(item)} icon={<MinusOutlined />} />
+                    <input type="text" value={item.quantity} className="input rounded-md bg-white input-bordered input-primary w-[30px] text-center p-0 h-[30px] md:w-[60px] md:h-[60px] max-w-xs" readOnly />
+                    <Button type="primary" className='md:w-[60px] md:h-[60px] bg-[#01183C] important rounded-md' onClick={() => handleAddToCart(item)} icon={<PlusOutlined className='text-xs' />} />
+                  </aside>
+                </figure>
+              ))}</> : <Button
                 type="primary"
                 className="bg-[#01183C] h-[40px] block w-full mx-auto my-[1rem] max-md:hidden"
+                onClick={() => handleAddToCart(product)}
               >
                 Add to Cart
-              </Button>
-             
+              </Button>}
+
+
             </div>
             <div className="flex md:hidden order-3 text-black items-center w-full justify-between font-bold text-md">
-                <h2 >{product?.name}</h2> <p>&#8358; {product?.price}</p>
-              </div>
-            <Button
-              type="primary"
-              className="bg-[#01183C] h-[40px] md:hidden order-3 block w-full mx-auto my-[1rem]"
-            >
-              Add to Cart
-            </Button>
+              <h2 >{product?.name}</h2> <p>&#8358; {product?.price}</p>
+            </div>
+          {foundItem ? <> {Object.values(aggregatedCartItems).map((item, index) => (
+                <figure key={index} className="order-3 md:hidden">
+                   <aside className='flex gap-4 p-[1rem]'>
+                    <Button type="primary" className='h-[60px]  bg-gray-500 important rounded-md' onClick={() => handleDecreaseQuantity(item)} icon={<MinusOutlined />} />
+                    <input type="text" value={item.quantity} className="input rounded-md bg-white input-bordered input-primary w-[30px] text-center p-0 h-[30px] md:w-[60px] md:h-[60px] max-w-xs" readOnly />
+                    <Button type="primary" className='md:w-[60px] md:h-[60px] bg-[#01183C] important rounded-md' onClick={() => handleAddToCart(item)} icon={<PlusOutlined className='text-xs' />} />
+                  </aside>
+                </figure>
+              ))}</> : <Button
+                type="primary"
+                className="bg-[#01183C] md:hidden h-[40px] block w-full mx-auto my-[1rem] max-md:hidden"
+                onClick={() => handleAddToCart(product)}
+              >
+                Add to Cart
+              </Button>}
+
+
           </figure>
 
           <figure className=" min-h-[50px] md:w-[90%]  mx-auto">
