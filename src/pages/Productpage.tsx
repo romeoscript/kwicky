@@ -38,9 +38,7 @@ const Productpage = () => {
   const handleAddToCart = (item: Product) => {
     addToCart(item)
   }
-  const handleRemoveFromCart = (item: Product) => {
-    removeFromCart(item)
-  }
+
   const handleDecreaseQuantity = (item: Product) => {
     decreaseQuantity(item);
   };
@@ -94,7 +92,7 @@ const Productpage = () => {
                 </Carousel>
               </div>
               {foundItem ? <> {Object.values(aggregatedCartItems).map((item, index) => (
-                <figure key={index}>
+                <figure key={index} className="max-md:hidden">
                    <aside className='flex gap-4 p-[1rem] max-md:hidden'>
                     <Button type="primary" className='h-[60px] bg-gray-500 important rounded-md' onClick={() => handleDecreaseQuantity(item)} icon={<MinusOutlined />} />
                     <input type="text" value={item.quantity} className="input rounded-md bg-white input-bordered input-primary w-[30px] text-center p-0 h-[30px] md:w-[60px] md:h-[60px] max-w-xs" readOnly />
@@ -109,14 +107,13 @@ const Productpage = () => {
                 Add to Cart
               </Button>}
 
-
             </div>
             <div className="flex md:hidden order-3 text-black items-center w-full justify-between font-bold text-md">
               <h2 >{product?.name}</h2> <p>&#8358; {product?.price}</p>
             </div>
           {foundItem ? <> {Object.values(aggregatedCartItems).map((item, index) => (
-                <figure key={index} className="order-3 md:hidden">
-                   <aside className='flex gap-4 p-[1rem]'>
+                <figure key={index} className="order-3 md:hidden ">
+                   <aside className='flex gap-4 p-[1rem] md:hidden'>
                     <Button type="primary" className='h-[60px]  bg-gray-500 important rounded-md' onClick={() => handleDecreaseQuantity(item)} icon={<MinusOutlined />} />
                     <input type="text" value={item.quantity} className="input rounded-md bg-white input-bordered input-primary w-[30px] text-center p-0 h-[30px] md:w-[60px] md:h-[60px] max-w-xs" readOnly />
                     <Button type="primary" className='md:w-[60px] md:h-[60px] bg-[#01183C] important rounded-md' onClick={() => handleAddToCart(item)} icon={<PlusOutlined className='text-xs' />} />
@@ -124,7 +121,7 @@ const Productpage = () => {
                 </figure>
               ))}</> : <Button
                 type="primary"
-                className="bg-[#01183C] md:hidden h-[40px] block w-full mx-auto my-[1rem] max-md:hidden"
+                className="bg-[#01183C] md:hidden order-3 h-[40px] block w-full mx-auto my-[1rem] md:hidden"
                 onClick={() => handleAddToCart(product)}
               >
                 Add to Cart
