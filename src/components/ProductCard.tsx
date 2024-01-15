@@ -50,10 +50,9 @@ const ProductCard: React.FC<cardprops> = ({id, name, img, price, rating, total }
 
             <figure className=' curvy z-20 relative rounded-[20px] flex items-left justify-end flex-col p-[1rem]'>
                 <p className="font-bold ">{name.length > 25? `${name.trim().substring(0,25)}...`:name.trim() }</p>
-
-                {/* <p className="flex items-center md:text-l  text-[yellow]"> */}
-                    {/* {renderStars(rating)} */}
-                    {/* <span className="text-white">({total})</span></p> */}
+                <p className="flex items-center md:text-l  text-[yellow]">
+                    {renderStars(rating)}
+                    <span className="text-white">({total})</span></p>
                 <h2 className="md:text-xl font-bold">&#8358;{price}</h2>
                 {/* <Button className='w-[90%] button_linear my-[1rem] mx-auto block md:h-[50px] ' type="primary" onClick={handleAddToCart}>Add to Cart</Button> */}
             </figure>

@@ -2,8 +2,7 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-background-color: white;
-
+  background-color: white;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -16,39 +15,47 @@ background-color: white;
 
 
 
-.linear{
+.linear {
   background: linear-gradient(180deg, rgba(46, 99, 236, 0) 0%, #2E63EC 62.95%);
 }
-.button_linear{
+
+.button_linear {
   background: linear-gradient(180deg, #086AE5 0%, #318AFA 44.26%, #086AE5 100%);
 
 }
-.react-multi-carousel-dot--active button{
+
+.react-multi-carousel-dot--active button {
   width: 70px;
   border-radius: 12px;
 }
+
 .curvy {
-  border-radius: 75% 25% 20px 20px / 40% 11% 20px 20px ;
-  height: 55%;
+  border-radius: 75% 25% 20px 20px / 40% 11% 20px 20px;
+  height: 35%;
   background-color: #01183C;
+}
+
+@media (max-width:500px) {
+  .curvy{
+    height: 45%;
+  }
 }
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
 
-.important{
-  width: 60px!important;
+.important {
+  width: 60px !important;
 }
 
 @media (max-width:500px) {
-  .important{
-    width: 30px!important;
-    height: 30px!important;
+  .important {
+    width: 30px !important;
+    height: 30px !important;
   }
 }
 
-.ant-select-selector{
-  padding: 1.2rem!important;
+.ant-select-selector {
+  padding: 1.2rem !important;
 }
-

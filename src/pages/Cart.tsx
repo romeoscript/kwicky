@@ -5,6 +5,7 @@ import cartimg from '../assets/cartimg.png'
 import { Button } from 'antd'
 import { PlusOutlined, MinusOutlined } from '@ant-design/icons';
 import { useCart } from '../context/cartContext';
+import { Link } from 'react-router-dom';
 
 interface CartItem {
     id: number;
@@ -80,15 +81,17 @@ const Cart = () => {
                     <p className='flex justify-between'><span>Subtotal</span> <span>${total}</span></p>
                     <p className='border-b-2 border-t-2 my-[0.7rem] flex justify-between'><span>Shipping fee</span> <span>free</span></p>
                     <p className='flex justify-between font-bold text-black'><span>Total</span> <span>${total}</span></p>
-                    <Button
-                type="primary"
-                className="bg-[#01183C] h-[40px] block w-full mx-auto my-[1rem] max-md:hidden"
-              
-              >
-               checkout 
-              </Button>
+                    <Link to='/process'>
+                        <Button
+                            type="primary"
+                            className="bg-[#01183C] h-[40px] block w-full mx-auto my-[1rem] "
+
+                        >
+                            checkout
+                        </Button>
+                    </Link>
                 </aside>
-                
+
             </div> :
                 <div className='pt-[100px] mb-[2rem] flex items-center shadow-md ' >
                     <img src={cartimg} className=' md:h-[400px] md:w-[50%] m-auto' alt="" />

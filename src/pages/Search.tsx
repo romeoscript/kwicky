@@ -11,7 +11,7 @@ const Search = () => {
         <Layout>
             <div className='pt-[100px] flex gap-4  '>
                 <Searchfilter />
-                <div className='mb-[6rem] grid md:grid-cols-4 gap-[10%] grid-cols-2 gap-2 p-[1rem] place-items-center'>
+                <div className='mb-[6rem] grid md:grid-cols-3 gap-[10%] grid-cols-2 gap-2 p-[1rem] place-items-center'>
                 <Link to='/product/2'>
                     <ProductCard name="Oculus Control"
                         img={oculus}

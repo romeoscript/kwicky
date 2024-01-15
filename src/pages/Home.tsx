@@ -24,6 +24,7 @@ type ProductsByCategory = {
 
 const Home: React.FC = () => {
     const { data: products } = useFetch<Product[]>('https://api.kwick.ng/api/v1/products/');
+console.log(products);
 
     // Group products by category
     const productsByCategory = products?.reduce((acc: ProductsByCategory, product: Product) => {

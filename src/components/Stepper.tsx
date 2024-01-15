@@ -3,6 +3,7 @@ import { Button, message, Steps } from 'antd';
 import oculus from '../assets/oculus.svg'
 import Address from './Address';
 import Card from './Card';
+import { useCart } from '../context/cartContext';
 
 const steps = [
     {
@@ -20,6 +21,9 @@ const steps = [
 ];
 
 const Stepper: React.FC = () => {
+    const { cartItems } = useCart()
+    console.log(cartItems);
+
     // const { token } = theme.useToken();
     const [current, setCurrent] = useState(0);
 
@@ -44,11 +48,13 @@ const Stepper: React.FC = () => {
                 <aside className='basis-[39%] max-w-[500px] text-black font-bold'>
                     <h2 className='text-xl my-[1rem] capitalize'>Summary</h2>
 
-                    <div className='flex items-center justify-between'>
-                        <img src={oculus} alt="" className='w-[100px] h-[100px] rounded-md object-cover' />
-                        <p>oculus control <br /> <span>$230</span></p>
-                    </div>
-                    <p className='flex items-center justify-between mt-[1rem]'> <span>Devlivery</span> <span>$13.50</span></p>
+                    {cartItems.map((item, index) => (
+                        <div className='flex items-center justify-between'>
+                            <img src={item.image1} alt="" className='w-[100px] h-[100px] rounded-md object-cover' />
+                            <p>{item.name.length > 10? item.name.substring(0,10)+'...': item.name} <br /> <span>#{item.price}</span></p>
+                        </div>
+                    ))}
+                    <p className='flex items-center justify-between mt-[1rem]'> <span>Devlivery</span> <span>free</span></p>
                     <p className='flex items-center justify-between my-[1rem]'> <span>Subtotal</span> <span>$13.50</span></p>
                     <p className='flex items-center justify-between'><span>Total</span> <span>$13.50</span></p>
                     <div style={{ marginTop: 24 }}>

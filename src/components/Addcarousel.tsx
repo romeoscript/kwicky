@@ -34,6 +34,7 @@ interface CategoryProps {
 
 const Addcarousel = () => {
     const { data, isLoading } = useFetch<CategoryProps[]>('https://api.kwick.ng/api/v1/category');
+    console.log(data);
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -48,7 +49,7 @@ const Addcarousel = () => {
                 <Carousel responsive={responsive} autoPlay={true} autoPlaySpeed={2000} showDots={true} infinite={true}>
                     {data?.map((item, index) => (
                         <div key={index} className='relative cursor-pointer z-100 md:h-[380px] h-[500px] w-full'>
-                            <img src={item.image? item.image: add1} className='h-full w-full rounded-[20px] object-cover' alt={`Carousel item ${index}`} />
+                            <img src={item.image ? item.image : add1} className='h-full w-full rounded-[20px] object-cover' alt={`Carousel item ${index}`} />
                         </div>
                     ))}
                 </Carousel>

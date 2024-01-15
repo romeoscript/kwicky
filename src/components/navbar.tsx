@@ -55,15 +55,17 @@ const Navbar = () => {
     return (
         <>
 
-            <section className='shadow-md fixed  z-200  bg-white w-full h-[80px] 'style={{ zIndex: 50 }}>
+            <section className='shadow-md fixed  z-200  bg-white w-full h-[80px] ' style={{ zIndex: 50 }}>
                 <div className="navbar  max-w-[1440px] m-auto  " >
 
                     <div className="flex-1">
                         <div className='text-2xl font-bold pl-[1rem] cursor-pointer md:hidden'>
                             <TbMenu onClick={showMobile} />
                         </div>
-                        <a className="btn btn-ghost text-xl">    <img src={logo} className='h-[60px]' alt="" /></a>
+                        <Link to='/'>
+                            <a className="btn btn-ghost text-xl">    <img src={logo} className='h-[60px]' alt="" /></a>
 
+                        </Link>
                     </div>
                     <div className="flex-none">
                         <ul className="menu menu-horizontal px-1 text-black flex items-center">
