@@ -35,6 +35,10 @@
   background-color: #01183C;
 }
 
+.father .react-multi-carousel-list{
+  margin-left: 1rem;
+}
+
 @media (max-width:500px) {
   .curvy{
     height: 45%;

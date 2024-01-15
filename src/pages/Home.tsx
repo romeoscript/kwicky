@@ -5,7 +5,8 @@ import Layout from '../components/Layout';
 import ProductCard from '../components/ProductCard';
 import { Link } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
-
+import Carousel from 'react-multi-carousel';
+import "react-multi-carousel/lib/styles.css";
 // Define types for your product and category
 type Product = {
     id: number;
@@ -15,7 +16,7 @@ type Product = {
     image2: string;
     image3: string;
     price: number;
-    category: number;
+    category_name: string;
 };
 
 type ProductsByCategory = {
@@ -24,11 +25,11 @@ type ProductsByCategory = {
 
 const Home: React.FC = () => {
     const { data: products } = useFetch<Product[]>('https://api.kwick.ng/api/v1/products/');
-console.log(products);
+    console.log(products);
 
     // Group products by category
     const productsByCategory = products?.reduce((acc: ProductsByCategory, product: Product) => {
-        const categoryName = `${product.category}`; // Adjust this to use your actual category names
+        const categoryName = `${product.category_name}`; // Adjust this to use your actual category names
         if (!acc[categoryName]) {
             acc[categoryName] = [];
         }
@@ -36,32 +37,55 @@ console.log(products);
         return acc;
     }, {});
 
+
+    const responsive = {
+
+        desktop: {
+            breakpoint: { max: 3000, min: 1024 },
+            items: 4
+        },
+        tablet: {
+            breakpoint: { max: 1024, min: 464 },
+            items: 3
+        },
+        mobile: {
+            breakpoint: { max: 464, min: 0 },
+            items: 2
+        }
+    };
     return (
         <Layout>
             <Hero />
             <Addcarousel />
-            {productsByCategory && Object.entries(productsByCategory).map(([category, products]) => (
-                <React.Fragment key={category}>
+
+            {productsByCategory && Object.entries(productsByCategory).map(([category_name, products]) => (
+                <React.Fragment key={category_name}>
                     <div className='px-[3rem] flex items-center justify-between'>
-                        <p className='font-bold text-black md:text-2xl my-[1.5rem]'>{category}</p>
+                        <p className='font-bold text-black md:text-2xl my-[1.5rem]'>{category_name}</p>
                         <p>view all</p>
                     </div>
-                    <div className='mb-[3rem] grid md:grid-cols-4 gap-4 grid-cols-2 gap-2 p-[1rem] place-items-center'>
-                        {products.map((product: Product) => (
-                            <Link to={`/product/${product.id}`} key={product.id}>
-                                <ProductCard
-                                    id={product.id}
-                                    name={product.name}
-                                    img={product.image1}
-                                    price={product.price}
-                                    rating={4}
-                                    total={120}
-                                />
-                            </Link>
-                        ))}
+
+                    <div className='w-full m-auto father'>
+                        <Carousel responsive={responsive} autoPlay={true} autoPlaySpeed={4000} showDots={false} infinite={true}>
+                            {products.map((product: Product) => (
+                                <Link to={`/product/${product.id}`} key={product.id}>
+                                    <ProductCard
+                                        id={product.id}
+                                        name={product.name}
+                                        img={product.image1}
+                                        price={product.price}
+                                        rating={4}
+                                        total={120}
+                                    />
+                                </Link>
+                            ))}
+                        </Carousel>
                     </div>
+
+
                 </React.Fragment>
             ))}
+
         </Layout>
     );
 };

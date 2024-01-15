@@ -35,7 +35,7 @@ const Cart = () => {
         decreaseQuantity(item);
     };
 
-    console.log(cartItems);
+
 
     const aggregatedCartItems: Record<number, AggregatedCartItem> = cartItems.reduce((acc: Record<number, AggregatedCartItem>, item: CartItem) => {
         if (acc[item.id]) {
@@ -52,7 +52,22 @@ const Cart = () => {
         return sum + parseFloat(product?.price); // Directly use price as a number
     }, 0);
 
-    console.log(total);
+
+    const responsive = {
+
+        desktop: {
+            breakpoint: { max: 3000, min: 1024 },
+            items: 1
+        },
+        tablet: {
+            breakpoint: { max: 1024, min: 464 },
+            items: 1
+        },
+        mobile: {
+            breakpoint: { max: 464, min: 0 },
+            items: 1
+        }
+    };
 
     return (
         <Layout>

@@ -12,6 +12,7 @@ import useFetch from "../hooks/useFetch"
 import useRecentlyViewedProducts from "../hooks/useRecent"
 
 
+
 interface Product {
   id: number;
   name: string;
@@ -87,7 +88,6 @@ const Productpage = () => {
             <div className="h-full max-md:order-1 ">
               <div className="">
                 <Carousel showArrows={true} showThumbs={false} autoPlay={true} interval={3000} showStatus={false} infiniteLoop={true}>
-
                   {mainImage}
                 </Carousel>
               </div>
