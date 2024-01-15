@@ -30,11 +30,10 @@ const useRecentlyViewedProducts = (): RecentlyViewedHook => {
   const addProduct = useCallback((product: Product) => {
     console.log(product);
     const updatedRecentlyViewed = [product, ...recentlyViewed.slice(0,10)]
-    console.log(updatedRecentlyViewed,'omor');
     setRecentlyViewed(updatedRecentlyViewed)
      setRecentlyViewed(updatedRecentlyViewed);
      localStorage.setItem('recentlyViewed', JSON.stringify(updatedRecentlyViewed));
-  },[]);
+  },[recentlyViewed]);
 
   return { recentlyViewed, addProduct };
 };

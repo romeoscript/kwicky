@@ -33,12 +33,6 @@ const Productpage = () => {
 
   console.log(product);
 
-  useEffect(() => {
-    if (product) {
-      addProduct(product);
-    }
-  }, [product, addProduct]);
-  
   // console.log(id, product);
 
 
@@ -70,14 +64,18 @@ const Productpage = () => {
                   {mainImage}
                 </Carousel>
               </div>
-
+             
               <Button
                 type="primary"
                 className="bg-[#01183C] h-[40px] block w-full mx-auto my-[1rem] max-md:hidden"
               >
                 Add to Cart
               </Button>
+             
             </div>
+            <div className="flex md:hidden order-3 text-black items-center w-full justify-between font-bold text-md">
+                <h2 >{product?.name}</h2> <p>&#8358; {product?.price}</p>
+              </div>
             <Button
               type="primary"
               className="bg-[#01183C] h-[40px] md:hidden order-3 block w-full mx-auto my-[1rem]"

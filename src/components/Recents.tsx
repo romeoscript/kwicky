@@ -16,7 +16,7 @@ const Recents = () => {
             {recentlyViewed?.map((recent, index) => (
                 <Link to={`product/${recent.id}`} key={index}>
                 <ProductCard name={recent.name} 
-                    img={recent.image1}
+                    img={recent?.img}
                     price={recent.price}
                     rating={4}
                     total={120}
