@@ -9,6 +9,7 @@ import Cart from './pages/Cart'
 import Steppedpage from './pages/Steppedpage'
 import { Route, Routes } from 'react-router-dom'
 import { useScrollto } from './hooks/useScrollto'
+import Categories from './pages/Categories'
 
 function App() {
   useScrollto();
@@ -21,6 +22,8 @@ function App() {
         <Route path='/cart' element={<Cart/>} />
         <Route path='/process' element={<Steppedpage/>} />
         <Route path='/product/:id' element={<Productpage/>} />
+        <Route path='/category/:companyname/:id' element={<Categories/>} />
+        <Route path='/category/:companyname/' element={<Categories/>} />
       </Routes>
     </>
   )

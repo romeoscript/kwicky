@@ -17,6 +17,7 @@ type Product = {
     image3: string;
     price: number;
     category_name: string;
+    get_absolute_url:string;
 };
 
 type ProductsByCategory = {
@@ -25,8 +26,6 @@ type ProductsByCategory = {
 
 const Home: React.FC = () => {
     const { data: products } = useFetch<Product[]>('https://api.kwick.ng/api/v1/products/');
-    console.log(products);
-
     // Group products by category
     const productsByCategory = products?.reduce((acc: ProductsByCategory, product: Product) => {
         const categoryName = `${product.category_name}`; // Adjust this to use your actual category names
@@ -53,6 +52,9 @@ const Home: React.FC = () => {
             items: 2
         }
     };
+
+ 
+    
     return (
         <Layout>
             <Hero />
@@ -60,9 +62,12 @@ const Home: React.FC = () => {
 
             {productsByCategory && Object.entries(productsByCategory).map(([category_name, products]) => (
                 <React.Fragment key={category_name}>
+                
                     <div className='px-[3rem] flex items-center justify-between'>
                         <p className='font-bold text-black md:text-2xl my-[1.5rem]'>{category_name}</p>
-                        <p>view all</p>
+                       <Link to={`/category${products[0].get_absolute_url}`}>
+                       <p>view all</p>
+                       </Link>
                     </div>
 
                     <div className='w-full m-auto father'>

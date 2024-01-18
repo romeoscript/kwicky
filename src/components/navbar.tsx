@@ -14,6 +14,30 @@ import { useState } from 'react';
 import { motion } from 'framer-motion'
 import { useCart } from '../context/cartContext';
 import { Link } from 'react-router-dom';
+import useFetch from '../hooks/useFetch';
+
+type Product = {
+    id: number;
+    name: string;
+    get_absolute_url: string;
+    description: string;
+    price: string;
+    get_image: string;
+    image1: string;
+    image2: string;
+    image3: string;
+    get_thumbnail: string;
+    stock_quantity: number;
+    category_name: string;
+};
+
+type Category = {
+    id: number;
+    name: string;
+    get_absolute_url: string;
+    image: string;
+    products: Product[];
+};
 
 const Navbar = () => {
     const { cartItems } = useCart()
@@ -52,6 +76,11 @@ const Navbar = () => {
             disabled: true,
         },
     ];
+
+    const { data } = useFetch<Category[]>('https://api.kwick.ng/api/v1/category/')
+
+ 
+
     return (
         <>
 
@@ -75,9 +104,13 @@ const Navbar = () => {
                                     <summary>
                                         category
                                     </summary>
-                                    <ul className="p-2 bg-white rounded-t-none">
-                                        <li><a>Link 1</a></li>
-                                        <li><a>Link 2</a></li>
+                                    <ul className="p-2 bg-white rounded-t-none grid grid-cols-3 w-[400px]">
+                                        {data?.map((category, index) => (
+                                            <Link to={`/category${category.get_absolute_url}`} key={index}>
+                                                <li><a>{category.name}</a></li>
+                                            </Link>
+
+                                        ))}
                                     </ul>
                                 </details>
                             </li>

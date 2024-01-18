@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Button, message, Steps } from 'antd';
-import oculus from '../assets/oculus.svg'
+import { useMonnifyPayment } from 'react-monnify';
 import Address from './Address';
 import Card from './Card';
 import { useCart } from '../context/cartContext';
+
 
 const steps = [
     {
@@ -22,9 +23,38 @@ const steps = [
 
 const Stepper: React.FC = () => {
     const { cartItems } = useCart()
-    console.log(cartItems);
+    const [paymentDetails, setPaymentDetails] = useState({
+        amount: 5010,
+        currency: 'NGN',
+        reference: '' + Math.floor(Math.random() * 1000000000 + 1),
+        customerFullName: 'peter Doe',
+        customerEmail: 'benjaminparish6@gmail.com.com',
+        customerMobileNumber: '08121281921',
+        apiKey: 'MK_TEST_EFVXG2AKJG',
+        contractCode: '4384772226',
+        paymentDescription: 'Test Pay',
+         isTestMode: true,
+        metadata: {
+            name: 'Damilare',
+            age: 45,
+        },
+    });
 
-    // const { token } = theme.useToken();
+    const handleSuccess = (response) => {
+        console.log("Payment successful", response);
+        // Handle successful payment here
+    };
+
+    const handleClose = () => {
+        console.log("Payment widget closed");
+        // Handle the closing of the payment widget here
+    };
+
+const far = useMonnifyPayment(paymentDetails)
+
+
+
+   
     const [current, setCurrent] = useState(0);
 
     const next = () => {
@@ -49,9 +79,9 @@ const Stepper: React.FC = () => {
                     <h2 className='text-xl my-[1rem] capitalize'>Summary</h2>
 
                     {cartItems.map((item, index) => (
-                        <div className='flex items-center justify-between'>
+                        <div className='flex items-center justify-between' key={index}>
                             <img src={item.image1} alt="" className='w-[100px] h-[100px] rounded-md object-cover' />
-                            <p>{item.name.length > 10? item.name.substring(0,10)+'...': item.name} <br /> <span>#{item.price}</span></p>
+                            <p>{item.name.length > 10 ? item.name.substring(0, 10) + '...' : item.name} <br /> <span>#{item.price}</span></p>
                         </div>
                     ))}
                     <p className='flex items-center justify-between mt-[1rem]'> <span>Devlivery</span> <span>free</span></p>
@@ -68,11 +98,10 @@ const Stepper: React.FC = () => {
                                 Done
                             </Button>
                         )}
-
                     </div>
                 </aside>
-
-
+               
+                <button onClick={() => far()}>Pay with Monnify</button>
             </div>
         </>
     );

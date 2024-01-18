@@ -3,7 +3,6 @@
 import Layout from '../components/Layout'
 
 import ProductCard from '../components/ProductCard'
-import oculus from '../assets/oculus.svg'
 import { Link, useSearchParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
