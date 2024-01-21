@@ -39,10 +39,8 @@ const Productpage = () => {
   const handleDecreaseQuantity = (item: Product) => {
     decreaseQuantity(item as Product);
   };
-
   const foundItem = cartItems.find(item => item.id === product?.id);
   const productQuantityInCart = cartItems.reduce((total, item) => item.id === product?.id ? total + 1 : total, 0);
-
 
   const imageurls = product ? [product.get_image, product.image1, product.image2, product.image3] : [];
   const imageElements = imageurls.slice(0, 3).map((url, index) => (
