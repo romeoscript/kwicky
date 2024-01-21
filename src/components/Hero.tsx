@@ -5,6 +5,7 @@ import { Input } from 'antd';
 import { RiSearch2Line } from "react-icons/ri";
 import Carousels from './Carousel';
 
+
 const Hero = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const navigate = useNavigate();

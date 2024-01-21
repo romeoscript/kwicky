@@ -24,7 +24,6 @@ const CookkieBanner = () => {
         console.log('Decline clicked');
         // Store user consent
         localStorage.setItem('userConsent', 'declined');
-        // Opt out of PostHog capturing
         posthog.opt_out_capturing();
         setIsVisible(false);
     };

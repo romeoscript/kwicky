@@ -1,10 +1,13 @@
 
 import Carousel from 'react-multi-carousel'
 import "react-multi-carousel/lib/styles.css";
+import add1 from '../assets/Frame 443 (1).svg'
+import add from '../assets/Frame 444 (1).svg'
+import add2 from '../assets/Frame 455.svg'
+import addy from '../assets/lady_bag.png'
+import addy1 from '../assets/something.png'
+import addy2 from '../assets/lappy.png'
 
-import add1 from '../assets/add1.svg'
-
-import useFetch from '../hooks/useFetch'
 
 
 const responsive = {
@@ -23,31 +26,38 @@ const responsive = {
     }
 };
 
-interface CategoryProps {
-    image: string;
-}
+
 
 const Addcarousel = () => {
-    const { data, isLoading } = useFetch<CategoryProps[]>('https://api.kwick.ng/api/v1/category');
 
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
-
-
-    //const images = [add, add1, add2,];
+const images = [
+    {
+    img1:add,
+    img2:addy
+},
+    {
+    img1:add1,
+    img2:addy1
+},
+    {
+    img1:add2,
+    img2:addy2
+},
+]
+   
 
     return (
         <div className='md:w-[80%] md:my-[4rem] my-[2rem] m-auto bg-white p-[1rem]' >
-            {data && data.length > 0 && (
+          
                 <Carousel responsive={responsive} autoPlay={true} autoPlaySpeed={2000} showDots={true} infinite={true}>
-                    {data?.map((item, index) => (
+                    {images?.map((item, index) => (
                         <div key={index} className='relative cursor-pointer z-100 md:h-[380px] h-[500px] w-full'>
-                            <img src={item.image ? item.image : add1} className='h-full w-full rounded-[20px] object-cover' alt={`Carousel item ${index}`} />
+                          <img src={item.img1} className='h-full w-full rounded-[20px] object-cover' alt={`Carousel item ${index}`} />
+                          <img src={item.img2} className='absolute max-md:bottom-0 max-md:w-full h-[50%] max-md:object-contain  md:h-full md:top-0 md:right-0 rounded-[20px] '  alt="" />
                         </div>
                     ))}
                 </Carousel>
-            )}
+            
         </div>
     )
 }
