@@ -11,7 +11,6 @@ const Search = () => {
     const [searchParams] = useSearchParams();
     const [searchData, setSearchData] = useState(null)
     const query = searchParams.get('q');
-    console.log(query);
 
     async function searchProducts() {
         const response = await fetch('https://api.kwick.ng/api/v1/products/search/', {

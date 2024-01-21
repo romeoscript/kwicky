@@ -7,11 +7,6 @@ import add1 from '../assets/add1.svg'
 import useFetch from '../hooks/useFetch'
 
 
-
-
-// const backend = process.env.REACT_APP_BACKEND_URL;
-// console.log(backend);
-
 const responsive = {
 
     desktop: {
@@ -34,12 +29,11 @@ interface CategoryProps {
 
 const Addcarousel = () => {
     const { data, isLoading } = useFetch<CategoryProps[]>('https://api.kwick.ng/api/v1/category');
-    console.log(data);
 
     if (isLoading) {
         return <div>Loading...</div>;
     }
-    console.log(data);
+
 
     //const images = [add, add1, add2,];
 

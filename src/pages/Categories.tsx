@@ -42,7 +42,7 @@ const Categories = () => {
             <Layout>
                 <div className='pt-[100px]  gap-4  '>
 
-                    <h2 className="font-bold text-2xl">
+                    <h2 className="font-bold text-2xl p-[2rem]">
                         {category?.name}
                     </h2>
                     <div className='mb-[6rem] grid md:grid-cols-4 gap-8 place-items-center grid-cols-2 gap-2 p-[1rem] place-items-center'>

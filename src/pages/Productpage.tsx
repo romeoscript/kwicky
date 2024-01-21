@@ -46,11 +46,8 @@ const Productpage = () => {
 
 
 
-  console.log(cartItems);
 
   const foundItem = cartItems.find(item => item.id === product?.id);
-
-  console.log(foundItem, product?.id);
 
   const aggregatedCartItems: Record<number, AggregatedCartItem> = cartItems.reduce((acc: Record<number, AggregatedCartItem>, item: Product) => {
     if (acc[item.id]) {

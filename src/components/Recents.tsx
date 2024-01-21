@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 const Recents = () => {
 
     const { recentlyViewed } = useRecentlyViewedProducts()
-    console.log(recentlyViewed);
+
 
     return (
         

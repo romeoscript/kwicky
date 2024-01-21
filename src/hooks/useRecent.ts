@@ -28,7 +28,7 @@ const useRecentlyViewedProducts = (): RecentlyViewedHook => {
   }, []);
 
   const addProduct = useCallback((product: Product) => {
-    console.log(product);
+
     const updatedRecentlyViewed = [product, ...recentlyViewed.slice(0,10)]
     setRecentlyViewed(updatedRecentlyViewed)
      setRecentlyViewed(updatedRecentlyViewed);

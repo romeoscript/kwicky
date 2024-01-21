@@ -40,21 +40,9 @@ const Stepper: React.FC = () => {
         },
     });
 
-    const handleSuccess = (response) => {
-        console.log("Payment successful", response);
-        // Handle successful payment here
-    };
-
-    const handleClose = () => {
-        console.log("Payment widget closed");
-        // Handle the closing of the payment widget here
-    };
 
 const far = useMonnifyPayment(paymentDetails)
 
-
-
-   
     const [current, setCurrent] = useState(0);
 
     const next = () => {

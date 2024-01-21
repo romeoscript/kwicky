@@ -54,7 +54,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const decreaseQuantity = (product: Product) => {
     setCartItems((prevItems) => {
         const existingItemIndex = prevItems.findIndex(item => item.id === product.id);
-        console.log(existingItemIndex);
+   
         
         if (existingItemIndex !== -1) {
           
@@ -70,20 +70,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 };
 
   
-//   const decreaseQuantity = (product: Product) => {
-//     setCartItems((prevItems) => {
-//         const existingItemIndex = prevItems.findIndex(item => item.id === product.id);
-//         console.log(existingItemIndex);
-        
-//         // if (existingItemIndex !== -1 && prevItems[existingItemIndex].quantity > 1) {
-//         //     const updatedItems = [...prevItems];
-//         //     updatedItems[existingItemIndex].quantity -= 1;
-//         //     return updatedItems;
-//         // } else {
-//         //     return prevItems.filter(item => item.id !== product.id);
-//         // }
-//     });
-// };
+
 
   return (
     <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, decreaseQuantity }}>
