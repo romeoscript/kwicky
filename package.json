@@ -24,7 +24,8 @@
     "react-monnify": "^0.0.7",
     "react-multi-carousel": "^2.8.4",
     "react-responsive-carousel": "^3.2.23",
-    "react-router-dom": "^6.3.0"
+    "react-router-dom": "^6.3.0",
+    "react-spinners": "^0.13.8"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
