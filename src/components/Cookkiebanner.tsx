@@ -33,7 +33,7 @@ const CookkieBanner = () => {
     }
 
     return (
-        <section className='fixed md:bottom-[10%] w-full bottom-[20%]'>
+        <section className='fixed md:bottom-[10%] w-full bottom-[20%]' style={{zIndex:500}}>
             <div className='text-white flex gap-8 p-[1rem] rounded-lg bg-[#086AE5] items-center justify-center flex-col w-[90%] text-center m-auto'>
                 <h2 className='capitalize font-bold'>Cookie & Privacy</h2>
                 <p>We use cookies to improve your browsing experience, analyze site traffic, and personalize content and ads. By clicking 'Accept', you consent to our use of cookies and our Privacy Policy.</p>
