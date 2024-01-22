@@ -7,6 +7,9 @@ import add2 from '../assets/Frame 455.svg'
 import addy from '../assets/lady_bag.png'
 import addy1 from '../assets/something.png'
 import addy2 from '../assets/lappy.png'
+import add3 from '../assets/forphone.png'
+import { useState, useEffect } from 'react';
+
 
 
 
@@ -29,21 +32,30 @@ const responsive = {
 
 
 const Addcarousel = () => {
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-const images = [
-    {
-    img1:add,
-    img2:addy
-},
-    {
-    img1:add1,
-    img2:addy1
-},
-    {
-    img1:add2,
-    img2:addy2
-},
-]
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    const images = windowWidth <= 464 ? [
+        { img1: add, img2: addy },
+        { img1: add1, img2: addy1 },
+        { img1: add2, img2: add3 }, // Using add3 for mobile
+    ] : [
+        { img1: add, img2: addy },
+        { img1: add1, img2: addy1 },
+        { img1: add2, img2: addy2 }, // Using add2 for desktop and tablet
+    ];
+
    
 
     return (
