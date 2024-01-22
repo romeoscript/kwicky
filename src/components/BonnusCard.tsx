@@ -36,7 +36,7 @@ const BonnusCard: React.FC<BonnusCardProps> = ({ imageUrl, title, price, rating,
             <div className="card-body  bg-[#01183C] min-h-[100px] rounded-b-md">
                 <div>
                     <h2 className="card-title text-[yellow]"> {renderStars(rating)}</h2>
-                    <p className='text-white font-bold text-2xl'>{price}</p>
+                    <p className='text-white font-bold text-2xl'>&#8358;{price}</p>
                 </div>
                 <button className="btn btn-primary absolute right-[1rem] h-[56px] w-[56px] bottom-[1rem]">10%</button>
                 {/* <div className="card-actions justify-end">

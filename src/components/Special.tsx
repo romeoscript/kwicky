@@ -6,9 +6,9 @@ import BonnusCard from './BonnusCard'
 
 const Special = () => {
     return (
-        <div className='m-[1rem] p-[2rem]'>
-            <h2>Valentine Sales With </h2>
-            <p>10% Discount</p>
+        <div className='m-[1rem] p-[2rem] text-black'>
+            <h2 className='text-xl font-bold'>Valentine Sales With </h2>
+            <p className='md:text-4xl text-xl font-bold '>10% Discount</p>
 
             <div className='grid md:grid-cols-2 gap-4 my-[2rem] '>
                 <aside>
