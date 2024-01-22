@@ -1,23 +1,41 @@
 import React from 'react'
+import { CiStar } from "react-icons/ci";
+import { FaStar } from "react-icons/fa";
+import { IoMdStarHalf } from "react-icons/io";
 
 type BonnusCardProps = {
     imageUrl: string;
     title: string;
-    description: string;
+    rating: number;
+    price:number;
     height?: string; 
 };
 
-const BonnusCard: React.FC<BonnusCardProps> = ({ imageUrl, title, description, height }) => {
+const BonnusCard: React.FC<BonnusCardProps> = ({ imageUrl, title, price, rating, height }) => {
     const cardStyle: React.CSSProperties = {
         height: height || '300px', // Default width is 24rem (w-96), but it can be overridden by props
+    };
+
+    const renderStars = (rating: number) => {
+        let stars = [];
+        for (let i = 1; i <= 5; i++) {
+            if (i <= rating) {
+                stars.push(<FaStar key={i} />);
+            } else if (i - 1 < rating && i > rating) {
+                stars.push(<IoMdStarHalf key={i} />);
+            } else {
+                stars.push(<CiStar key={i} />);
+            }
+        }
+        return stars;
     };
 
     return (
         <div className="card card-compact bg-base-100 shadow-xl mb-[1rem] max-w-[500px]" style={cardStyle}>
             <figure><img src={imageUrl} className='w-full object-cover' alt={title} /></figure>
             <div className="card-body bg-[#01183C] rounded-b-md">
-                <h2 className="card-title">{title}</h2>
-                <p>{description}</p>
+                <h2 className="card-title"> {renderStars(rating)}</h2>
+                <p>{price}</p>
                 <div className="card-actions justify-end">
                     <button className="btn btn-primary">Buy Now</button>
                 </div>
