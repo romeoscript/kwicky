@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
-import ProductCard from '../components/ProductCard';
+
 
 // Define the structure of the product object
 interface Product {

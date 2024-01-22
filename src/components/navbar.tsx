@@ -16,6 +16,7 @@ import { useCart } from '../context/cartContext';
 import { Link } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
 import { Menu } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 type Product = {
     id: number;
@@ -43,6 +44,17 @@ type Category = {
 const Navbar = () => {
     const { cartItems } = useCart()
     const [mobile, setMobile] = useState(false)
+    const [searchTerm, setSearchTerm] = useState('');
+    const navigate = useNavigate();
+
+    const handleSearchSubmit = (event: any) => {
+        event.preventDefault();
+        navigate(`/search?q=${encodeURIComponent(searchTerm)}`);
+    };
+
+    const handleSearchChange = (event: any) => {
+        setSearchTerm(event.target.value);
+    };
 
     const showMobile = () => {
         setMobile(!mobile)
@@ -159,13 +171,13 @@ const Navbar = () => {
                                 <Link to='/'>    <a className="btn btn-ghost text-xl">    <img src={logo} className='h-[60px]' alt="" /></a></Link>
                                 <IoMdClose className="text-2xl cursor-pointer" onClick={showMobile} />
                             </div>
-                            <form >
+                            <form onSubmit={handleSearchSubmit}>
                                 <Input
                                     className='w-full rounded-full p-[1rem]'
                                     size="large"
                                     placeholder="Search for Products"
                                     prefix={<RiSearch2Line />}
-
+                                    onChange={handleSearchChange}
                                 />
                             </form>
                             <Dropdown overlay={<Menu items={categoryMenuItems} />} className='z-20'>

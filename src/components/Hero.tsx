@@ -23,7 +23,7 @@ const Hero = () => {
         <div className="hero h-screen bg-white z-1 flex flex-col">
             <div className='hero_1 bg-[white] relative z-1 w-full md:h-[100%]'>
                 <figure>
-                    <img src={background} className='object-cover md:h-[70%] h-[550px] w-full max-md:rounded-b-[40%] ' alt="" />
+                    <img src={background} className='object-cover md:h-[70%] h-[650px] w-full max-md:rounded-b-[40%] ' alt="" />
 
                     <div className='absolute inset-0 md:top-[-25%] flex items-center justify-center z-10 '>
                         <div className='text-center text-white '>
