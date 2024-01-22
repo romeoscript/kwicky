@@ -52,9 +52,11 @@ const Search = () => {
 
     if (Array.isArray(searchData) && searchData?.length === 0) {
         return (
-            <div className='flex items-center md:h-[100vh] justify-center'>
-                <img src={nothing} className='w-full max-h-[500px] max-w-[500px]' alt="No Results Found " />
-            </div>
+            <Layout>
+                <div className='flex items-center md:h-[100vh] justify-center'>
+                    <img src={nothing} className='w-full max-h-[500px] max-w-[500px]' alt="No Results Found " />
+                </div>
+            </Layout>
         );
     }
 

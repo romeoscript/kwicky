@@ -15,6 +15,7 @@ import { motion } from 'framer-motion'
 import { useCart } from '../context/cartContext';
 import { Link } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
+import {Menu} from 'antd';
 
 type Product = {
     id: number;
@@ -46,6 +47,9 @@ const Navbar = () => {
     const showMobile = () => {
         setMobile(!mobile)
     }
+    const closeMobileMenu = () => {
+        setMobile(false);
+    };
     const mobileMenuVariants = {
         hidden: { opacity: 0, scale: 0.95 },
         visible: { opacity: 1, scale: 1 }
@@ -79,8 +83,10 @@ const Navbar = () => {
 
     const { data } = useFetch<Category[]>('https://api.kwick.ng/api/v1/category/')
 
- 
-
+    const categoryMenuItems: MenuProps['items'] = data?.map((category) => ({
+        label: <Link to={`/category${category.get_absolute_url}`} onClick={closeMobileMenu}>{category.name}</Link>,
+        key: category.id,
+    })) || [];
     return (
         <>
 
@@ -155,7 +161,7 @@ const Navbar = () => {
 
                             />
                         </form>
-                        <Dropdown menu={{ items }} className='z-20'>
+                        <Dropdown overlay={<Menu items={categoryMenuItems} />} className='z-20'>
                             <a onClick={(e) => e.preventDefault()}>
                                 <Space>
                                     Category
