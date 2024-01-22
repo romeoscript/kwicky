@@ -60,7 +60,7 @@ const Search = () => {
         );
     }
 
-    console.log(searchData);
+
 
     return (
         <Layout>
@@ -78,8 +78,6 @@ const Search = () => {
                             />
                         </Link>
                     ))}
-
-
                 </div>
             </div>
         </Layout>

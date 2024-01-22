@@ -47,6 +47,7 @@ const far = useMonnifyPayment(paymentDetails)
 
     const next = () => {
         setCurrent(current + 1);
+        far()
     };
 
 
@@ -89,7 +90,7 @@ const far = useMonnifyPayment(paymentDetails)
                     </div>
                 </aside>
                
-                <button onClick={() => far()}>Pay with Monnify</button>
+             
             </div>
         </>
     );
