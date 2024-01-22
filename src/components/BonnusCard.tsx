@@ -7,8 +7,8 @@ type BonnusCardProps = {
     imageUrl: string;
     title: string;
     rating: number;
-    price:number;
-    height?: string; 
+    price: number;
+    height?: string;
 };
 
 const BonnusCard: React.FC<BonnusCardProps> = ({ imageUrl, title, price, rating, height }) => {
@@ -33,12 +33,15 @@ const BonnusCard: React.FC<BonnusCardProps> = ({ imageUrl, title, price, rating,
     return (
         <div className="card card-compact bg-base-100 shadow-xl mb-[1rem] max-w-[500px]" style={cardStyle}>
             <figure><img src={imageUrl} className='w-full object-cover' alt={title} /></figure>
-            <div className="card-body bg-[#01183C] rounded-b-md">
-                <h2 className="card-title"> {renderStars(rating)}</h2>
-                <p>{price}</p>
-                <div className="card-actions justify-end">
-                    <button className="btn btn-primary">Buy Now</button>
+            <div className="card-body  bg-[#01183C] min-h-[100px] rounded-b-md">
+                <div>
+                    <h2 className="card-title text-[yellow]"> {renderStars(rating)}</h2>
+                    <p className='text-white font-bold text-2xl'>{price}</p>
                 </div>
+                <button className="btn btn-primary absolute right-[1rem] h-[56px] w-[56px] bottom-[1rem]">10%</button>
+                {/* <div className="card-actions justify-end">
+                    <button className="btn btn-primary">Buy Now</button>
+                </div> */}
             </div>
         </div>
     )
