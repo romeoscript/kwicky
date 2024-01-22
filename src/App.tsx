@@ -12,12 +12,32 @@ import { useScrollto } from './hooks/useScrollto'
 import Categories from './pages/Categories'
 import Cookkiebanner from './components/Cookkiebanner'
 import posthog from 'posthog-js'
+import { useState, useEffect } from 'react'
+import Loading from './components/Loading'
+
 
 
 
 function App() {
-  useScrollto();
+  const [windowLoading, setWindowLoading] = useState(true);
 
+  useEffect(() => {
+    const handleLoad = () => {
+      setWindowLoading(false);
+    };
+
+    window.addEventListener('load', handleLoad);
+
+    return () => {
+      window.removeEventListener('load', handleLoad);
+    };
+  }, []);
+  useScrollto();
+  if (windowLoading) {
+    return (
+      <Loading />
+    );
+  }
   return (
     <>
       <Routes>

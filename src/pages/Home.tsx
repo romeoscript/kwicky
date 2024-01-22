@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
 import Carousel from 'react-multi-carousel';
 import "react-multi-carousel/lib/styles.css";
+import Loading from '../components/Loading';
 // Define types for your product and category
 type Product = {
     id: number;
@@ -17,7 +18,7 @@ type Product = {
     image3: string;
     price: number;
     category_name: string;
-    get_absolute_url:string;
+    get_absolute_url: string;
 };
 
 type ProductsByCategory = {
@@ -25,7 +26,7 @@ type ProductsByCategory = {
 };
 
 const Home: React.FC = () => {
-    const { data: products } = useFetch<Product[]>('https://api.kwick.ng/api/v1/products/');
+    const { data: products, isLoading } = useFetch<Product[]>('https://api.kwick.ng/api/v1/products/');
     // Group products by category
     const productsByCategory = products?.reduce((acc: ProductsByCategory, product: Product) => {
         const categoryName = `${product.category_name}`; // Adjust this to use your actual category names
@@ -53,8 +54,12 @@ const Home: React.FC = () => {
         }
     };
 
- 
-    
+    if (isLoading) {
+        return (
+            <Loading />
+        )
+    }
+
     return (
         <Layout>
             <Hero />
@@ -62,12 +67,12 @@ const Home: React.FC = () => {
 
             {productsByCategory && Object.entries(productsByCategory).map(([category_name, products]) => (
                 <React.Fragment key={category_name}>
-                
+
                     <div className='px-[3rem] flex items-center justify-between'>
                         <p className='font-bold text-black md:text-2xl my-[1.5rem]'>{category_name}</p>
-                       <Link to={`/category${products[0].get_absolute_url}`}>
-                       <p>view all</p>
-                       </Link>
+                        <Link to={`/category${products[0].get_absolute_url}`}>
+                            <p>view all</p>
+                        </Link>
                     </div>
 
                     <div className='w-full m-auto father'>
