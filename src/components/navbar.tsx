@@ -15,7 +15,7 @@ import { motion } from 'framer-motion'
 import { useCart } from '../context/cartContext';
 import { Link } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
-import {Menu} from 'antd';
+import { Menu } from 'antd';
 
 type Product = {
     id: number;
@@ -147,9 +147,9 @@ const Navbar = () => {
                         exit='hidden'
                         variants={mobileMenuVariants}
                         transition={{ duration: 0.3 }}
-                        className=' bg-[blue] flex flex-col gap-8 text-white absolute w-full  p-[1.5rem]' style={{ zIndex: 200 }}>
+                        className=' bg-[blue] flex flex-col gap-8 text-white absolute top-0 w-full  p-[1.5rem]' style={{ zIndex: 200 }}>
                         <div className='flex items-center justify-between gap-2 mb-[1rem]'>
-                            <a className="btn btn-ghost text-xl">    <img src={logo} className='h-[60px]' alt="" /></a>
+                            <Link to='/'>    <a className="btn btn-ghost text-xl">    <img src={logo} className='h-[60px]' alt="" /></a></Link>
                             <IoMdClose className="text-2xl cursor-pointer" onClick={showMobile} />
                         </div>
                         <form >
@@ -180,9 +180,11 @@ const Navbar = () => {
                         </Dropdown>
 
                         <li className='z-20 flex items-center gap-2' > <BiSupport />Support</li>
+                        <Link to='/cart'>
 
-                        <li className='bg-[#01183C] text-white rounded-md z-20 flex items-center p-[1rem] justify-center gap-2'><IoCartOutline />Cart</li>
+                            <li className='bg-[#01183C] text-white rounded-md z-20 flex items-center p-[1rem] justify-center gap-2'><IoCartOutline />Cart {cartItems.length}</li>
 
+                        </Link>
                     </motion.div>
                 }
             </section>
