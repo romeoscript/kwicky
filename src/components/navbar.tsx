@@ -141,51 +141,60 @@ const Navbar = () => {
 
                 </div>
                 {mobile &&
-                    <motion.div
-                        initial="hidden"
-                        animate="visible"
-                        exit='hidden'
-                        variants={mobileMenuVariants}
-                        transition={{ duration: 0.3 }}
-                        className=' bg-[blue] flex flex-col gap-8 text-white absolute top-0 w-full  p-[1.5rem]' style={{ zIndex: 200 }}>
-                        <div className='flex items-center justify-between gap-2 mb-[1rem]'>
-                            <Link to='/'>    <a className="btn btn-ghost text-xl">    <img src={logo} className='h-[60px]' alt="" /></a></Link>
-                            <IoMdClose className="text-2xl cursor-pointer" onClick={showMobile} />
-                        </div>
-                        <form >
-                            <Input
-                                className='w-full rounded-full p-[1rem]'
-                                size="large"
-                                placeholder="Search for Products"
-                                prefix={<RiSearch2Line />}
 
-                            />
-                        </form>
-                        <Dropdown overlay={<Menu items={categoryMenuItems} />} className='z-20'>
-                            <a onClick={(e) => e.preventDefault()}>
-                                <Space>
-                                    Category
-                                    <DownOutlined />
-                                </Space>
-                            </a>
-                        </Dropdown>
+                    <>
+                        <div
+                            className="fixed inset-0 bg-black bg-opacity-50 z-150"
+                            onClick={closeMobileMenu}
+                            style={{ zIndex: 150 }} // Ensure this zIndex is below the mobile menu but above everything else
+                        ></div>
+                        <motion.div
+                            initial="hidden"
+                            animate="visible"
+                            exit='hidden'
+                            variants={mobileMenuVariants}
+                            transition={{ duration: 0.3 }}
+                            className=' bg-[blue] flex flex-col gap-8 text-white absolute top-0 w-full  p-[1.5rem]' style={{ zIndex: 200 }}>
+                            <div className='flex items-center justify-between gap-2 mb-[1rem]'>
+                                <Link to='/'>    <a className="btn btn-ghost text-xl">    <img src={logo} className='h-[60px]' alt="" /></a></Link>
+                                <IoMdClose className="text-2xl cursor-pointer" onClick={showMobile} />
+                            </div>
+                            <form >
+                                <Input
+                                    className='w-full rounded-full p-[1rem]'
+                                    size="large"
+                                    placeholder="Search for Products"
+                                    prefix={<RiSearch2Line />}
 
-                        <Dropdown menu={{ items }} className='z-20'>
-                            <a onClick={(e) => e.preventDefault()}>
-                                <Space>
-                                    <GrLanguage /><a>Eng</a>
-                                    <DownOutlined />
-                                </Space>
-                            </a>
-                        </Dropdown>
+                                />
+                            </form>
+                            <Dropdown overlay={<Menu items={categoryMenuItems} />} className='z-20'>
+                                <a onClick={(e) => e.preventDefault()}>
+                                    <Space>
+                                        Category
+                                        <DownOutlined />
+                                    </Space>
+                                </a>
+                            </Dropdown>
 
-                        <li className='z-20 flex items-center gap-2' > <BiSupport />Support</li>
-                        <Link to='/cart'>
+                            <Dropdown menu={{ items }} className='z-20'>
+                                <a onClick={(e) => e.preventDefault()}>
+                                    <Space>
+                                        <GrLanguage /><a>Eng</a>
+                                        <DownOutlined />
+                                    </Space>
+                                </a>
+                            </Dropdown>
 
-                            <li className='bg-[#01183C] text-white rounded-md z-20 flex items-center p-[1rem] justify-center gap-2'><IoCartOutline />Cart {cartItems.length}</li>
+                            <li className='z-20 flex items-center gap-2' > <BiSupport />Support</li>
+                            <Link to='/cart'>
 
-                        </Link>
-                    </motion.div>
+                                <li className='bg-[#01183C] text-white rounded-md z-20 flex items-center p-[1rem] justify-center gap-2'><IoCartOutline />Cart {cartItems.length}</li>
+
+                            </Link>
+                        </motion.div>
+
+                    </>
                 }
             </section>
         </>
