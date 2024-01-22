@@ -1,13 +1,12 @@
 
 import Carousel from 'react-multi-carousel'
 import "react-multi-carousel/lib/styles.css";
-import add1 from '../assets/Frame 443 (1).svg'
-import add from '../assets/Frame 444 (1).svg'
-import add2 from '../assets/Frame 455.svg'
-import addy from '../assets/lady_bag.png'
-import addy1 from '../assets/something.png'
-import addy2 from '../assets/lappy.png'
-import add3 from '../assets/forphone.png'
+import add1 from '../assets/add1.png'
+import add from '../assets/add.png'
+import add2 from '../assets/add2.png'
+import add5 from '../assets/add5.png'
+import add4 from '../assets/add4.png'
+import add3 from '../assets/lapp1.png'
 import { useState, useEffect } from 'react';
 
 
@@ -44,30 +43,19 @@ const Addcarousel = () => {
         };
     }, []);
 
-    const images = windowWidth <= 464 ? [
-        { img1: add, img2: addy },
-        { img1: add1, img2: addy1 },
-        { img1: add2, img2: add3 }, // Using add3 for mobile
-    ] : [
-        { img1: add, img2: addy },
-        { img1: add1, img2: addy1 },
-        { img1: add2, img2: addy2 }, // Using add2 for desktop and tablet
-    ];
-
-   
+    const images = windowWidth <= 464 ? [add4, add5, add3] : [add, add1, add2];
 
     return (
         <div className='md:w-[80%] md:my-[4rem] my-[2rem] m-auto bg-white p-[1rem]' >
-          
-                <Carousel responsive={responsive} autoPlay={true} autoPlaySpeed={2000} showDots={true} infinite={true}>
-                    {images?.map((item, index) => (
-                        <div key={index} className='relative cursor-pointer z-100 md:h-[380px] h-[500px] w-full'>
-                          <img src={item.img1} className='h-full w-full rounded-[20px] object-cover' alt={`Carousel item ${index}`} />
-                          <img src={item.img2} className='absolute max-md:bottom-0 max-md:w-full h-[50%] max-md:object-contain  md:h-full md:top-0 md:right-0 rounded-[20px] '  alt="" />
-                        </div>
-                    ))}
-                </Carousel>
-            
+            <Carousel responsive={responsive} autoPlay={true} autoPlaySpeed={2000} showDots={true} infinite={true}>
+                {images?.map((item, index) => (
+                    <div key={index} className='relative cursor-pointer z-100 md:h-[380px] h-[500px] w-full'>
+                        <img src={item} className='h-full w-full rounded-[20px] object-cover' alt={`Carousel item ${index}`} />
+                        {/* <img src={item.img2} className='absolute max-md:bottom-0 max-md:w-full h-[50%] max-md:object-contain  md:h-full md:top-0 md:right-0 rounded-[20px] '  alt="" /> */}
+                    </div>
+                ))}
+            </Carousel>
+
         </div>
     )
 }
