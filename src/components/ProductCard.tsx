@@ -2,9 +2,9 @@ import { CiStar } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
 import { IoMdStarHalf } from "react-icons/io";
 
-import { Button } from 'antd'
+// import { Button } from 'antd'
 import React from "react";
-import { useCart } from "../context/cartContext";
+// import { useCart } from "../context/cartContext";
 
 interface cardprops {
     id:number
@@ -15,13 +15,13 @@ interface cardprops {
     total: number;
 }
 
-const ProductCard: React.FC<cardprops> = ({id, name, img, price, rating, total }) => {
-    const { addToCart } = useCart();
+const ProductCard: React.FC<cardprops> = ({ name, img, price, rating, total }) => {
+    // const { addToCart } = useCart();
 
-  const handleAddToCart = () => {
-    const product = { id,name, img, price, rating, total }; 
-    addToCart(product);
-  };
+//   const handleAddToCart = () => {
+//     const product = { id,name, img, price, rating, total }; 
+//     addToCart(product);
+//   };
     
 
     const renderStars = (rating: number) => {

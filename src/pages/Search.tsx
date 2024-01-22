@@ -7,10 +7,24 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import nothing from '../assets/notfound.png'
 
+type Product = {
+    id: number;
+    name: string;
+    get_absolute_url: string;
+    description: string;
+    price: string;
+    get_image: string;
+    image1: string;
+    image2: string;
+    image3: string;
+    get_thumbnail: string;
+    stock_quantity: number;
+    category_name: string;
+};
 
 const Search = () => {
     const [searchParams] = useSearchParams();
-    const [searchData, setSearchData] = useState(null)
+    const [searchData, setSearchData] = useState<Product[] | null>(null)
     const query = searchParams.get('q');
 
     async function searchProducts() {
@@ -43,14 +57,12 @@ const Search = () => {
             </div>
         );
     }
-    
+
     console.log(searchData);
-    
+
     return (
         <Layout>
             <div className='pt-[100px]  gap-4  '>
-                {/* <Searchfilter /> */}
-                {/* <img src={nothing} className=' w-full' alt="" /> */}
                 <div className='mb-[6rem] grid md:grid-cols-4 gap-8 place-items-center grid-cols-2 gap-2 p-[1rem] place-items-center'>
                     {searchData?.map((search: any, index: number) => (
                         <Link to={`/product/${search.id}`} key={index}>

@@ -3,7 +3,7 @@ import {  Select, Input } from 'antd'
 
 const Address = () => {
     const handleChange = (value: string) => {
-      
+        console.log(`selected ${value}`);
     };
 
     return (

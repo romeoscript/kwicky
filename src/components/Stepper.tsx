@@ -23,7 +23,7 @@ const steps = [
 
 const Stepper: React.FC = () => {
     const { cartItems } = useCart()
-    const [paymentDetails, setPaymentDetails] = useState({
+    const [paymentDetails] = useState({
         amount: 5010,
         currency: 'NGN',
         reference: '' + Math.floor(Math.random() * 1000000000 + 1),
