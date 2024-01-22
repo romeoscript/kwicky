@@ -8,6 +8,8 @@ import useFetch from '../hooks/useFetch';
 import Carousel from 'react-multi-carousel';
 import "react-multi-carousel/lib/styles.css";
 import Loading from '../components/Loading';
+import { useAnimation, motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 // Define types for your product and category
 type Product = {
     id: number;
@@ -60,6 +62,11 @@ const Home: React.FC = () => {
         )
     }
 
+    const fadeIn = {
+        hidden: { opacity: 0, y: 50 },
+        visible: { opacity: 1, y: 0 },
+    };
+
     return (
         <Layout>
             <Hero />
@@ -67,32 +74,37 @@ const Home: React.FC = () => {
 
             {productsByCategory && Object.entries(productsByCategory).map(([category_name, products]) => (
                 <React.Fragment key={category_name}>
+                    <motion.div 
+                        initial="hidden" 
+                        whileInView="visible" 
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        variants={fadeIn}
+                    >
+                        <div className='px-[3rem] flex items-center justify-between'>
+                            <p className='font-bold text-black md:text-2xl my-[1.5rem]'>{category_name}</p>
+                            <Link to={`/category${products[0].get_absolute_url}`}>
+                                <p>view all</p>
+                            </Link>
+                        </div>
 
-                    <div className='px-[3rem] flex items-center justify-between'>
-                        <p className='font-bold text-black md:text-2xl my-[1.5rem]'>{category_name}</p>
-                        <Link to={`/category${products[0].get_absolute_url}`}>
-                            <p>view all</p>
-                        </Link>
-                    </div>
-
-                    <div className='w-full m-auto father'>
-                        <Carousel responsive={responsive} autoPlay={true} autoPlaySpeed={4000} showDots={false} infinite={true}>
-                            {products.map((product: Product) => (
-                                <Link to={`/product/${product.id}`} key={product.id}>
-                                    <ProductCard
-                                        id={product.id}
-                                        name={product.name}
-                                        img={product.image1}
-                                        price={product.price}
-                                        rating={4}
-                                        total={120}
-                                    />
-                                </Link>
-                            ))}
-                        </Carousel>
-                    </div>
-
-
+                        <div className='w-full m-auto father'>
+                            <Carousel responsive={responsive} autoPlay={true} autoPlaySpeed={4000} showDots={false} infinite={true}>
+                                {products.map((product: Product) => (
+                                    <Link to={`/product/${product.id}`} key={product.id}>
+                                        <ProductCard
+                                            id={product.id}
+                                            name={product.name}
+                                            img={product.image1}
+                                            price={product.price}
+                                            rating={4}
+                                            total={120}
+                                        />
+                                    </Link>
+                                ))}
+                            </Carousel>
+                        </div>
+                    </motion.div>
                 </React.Fragment>
             ))}
 
