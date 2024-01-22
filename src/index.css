@@ -2,13 +2,19 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  overflow-x: hidden;
   background-color: white;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+html{
+  overflow-x: hidden
+}
+body{
+  overflow-x: hidden
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -62,4 +68,65 @@ h1 {
 
 .ant-select-selector {
   padding: 1.2rem !important;
+}
+
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0) translateX(0) scale(0.5);
+    opacity: 0.5;
+  }
+  25% {
+    transform: translateY(-20px) translateX(15px) scale(0.75);
+    opacity: 0.75;
+  }
+  50% {
+    transform: translateY(20px) translateX(-15px) scale(0.75);
+    opacity: 0.75;
+  }
+  75% {
+    transform: translateY(-10px) translateX(10px) scale(0.75);
+    opacity: 0.75;
+  }
+}
+
+.bubble-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none; /* Ignore mouse events */
+}
+
+.bubble {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: bounce 10s ease-in-out infinite both;
+}
+
+.bubble.small {
+  width: 20px;
+  height: 20px;
+  animation-duration: 8s;
+}
+
+.bubble.medium {
+  width: 40px;
+  height: 40px;
+  animation-duration: 10s;
+}
+
+.bubble.large {
+  width: 60px;
+  height: 60px;
+  animation-duration: 12s;
+}
+
+/* Randomly position the bubbles */
+.bubble {
+  left: calc(5% + 90% * var(--random-horizontal)); /* Random position between 5% and 95% horizontally */
+  top: calc(5% + 90% * var(--random-vertical)); /* Random position between 5% and 95% vertically */
 }

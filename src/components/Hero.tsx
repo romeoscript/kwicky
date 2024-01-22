@@ -19,12 +19,40 @@ const Hero = () => {
         setSearchTerm(event.target.value);
     };
 
+    const renderBubbles = () => {
+        const bubbles = [];
+        for (let i = 0; i < 20; i++) {
+            // Use React.CSSProperties and cast the custom properties
+            const style: React.CSSProperties = {
+                '--random-horizontal': `${Math.random()}`,
+                '--random-vertical': `${Math.random()}`
+            } as React.CSSProperties;
+            bubbles.push(
+                <div
+                    key={i}
+                    className={`bubble ${i % 3 === 0 ? 'large' : i % 3 === 1 ? 'medium' : 'small'}`}
+                    style={style} // Apply the style here
+                ></div>
+            );
+        }
+        return bubbles;
+    };
+    
+  
+  
+
     return (
         <div className="hero h-screen bg-white z-1 flex flex-col">
+        
             <div className='hero_1 bg-[white] relative z-1 w-full md:h-[100%]'>
+            <div className='bubble-container'>
+                  {/* Bubbles */}
+                  {renderBubbles()}
+                </div>
+
                 <figure>
                     <img src={background} className='object-cover md:h-[70%] h-[600px] w-full max-md:rounded-b-[40%] ' alt="" />
-
+                  
                     <div className='absolute inset-0 md:top-[-25%] flex items-center justify-center z-10 '>
                         <div className='text-center text-white '>
                             <p className='md:text-6xl text-2xl'>Explore Treasures At Kwick</p>
@@ -42,6 +70,7 @@ const Hero = () => {
                         </div>
                     </div>
                 </figure>
+          
             </div>
             <Carousels />
         </div>
