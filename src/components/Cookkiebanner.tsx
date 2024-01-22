@@ -6,10 +6,15 @@ const CookkieBanner = () => {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
-    
         const userConsent = localStorage.getItem('userConsent');
         if (userConsent === null) {
-            setIsVisible(true);
+            // Set a timeout to show the cookie banner after a few seconds
+            const timer = setTimeout(() => {
+                setIsVisible(true);
+            }, 3000); // Change 3000 to the number of milliseconds you want to wait before showing the banner
+
+            // Cleanup the timer when the component unmounts or if the userConsent status changes
+            return () => clearTimeout(timer);
         }
     }, []);
 
