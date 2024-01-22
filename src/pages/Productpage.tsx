@@ -10,6 +10,7 @@ import { useCart } from '../context/cartContext';
 import filled from '../assets/Filled.svg';
 import filled1 from '../assets/Filled (1).svg';
 import filled2 from '../assets/Frame 472.svg';
+import Loading from '../components/Loading';
 
 interface Product {
   id: number;
@@ -29,7 +30,7 @@ interface Product {
 
 const Productpage = () => {
   const { id } = useParams();
-  const { data: product } = useFetch<Product>(`https://api.kwick.ng/api/v1/product/${id}`);
+  const { data: product , isLoading} = useFetch<Product>(`https://api.kwick.ng/api/v1/product/${id}`);
   const { cartItems, addToCart, decreaseQuantity } = useCart();
 
   const handleAddToCart = (item: Product) => {
@@ -54,7 +55,11 @@ const Productpage = () => {
       <img src={url} className="md:h-[500px] h-[300px] object-cover w-full rounded-md" alt="" />
     </div>
   ));
-
+  if (isLoading) {
+    return (
+        <Loading />
+    )
+}
 
   return (
     <Layout>

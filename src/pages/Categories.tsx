@@ -3,6 +3,7 @@ import Layout from "../components/Layout"
 import ProductCard from "../components/ProductCard"
 import { useParams } from "react-router-dom"
 import useFetch from "../hooks/useFetch"
+import Loading from "../components/Loading"
 
 type Product = {
     id: number;
@@ -31,9 +32,13 @@ type Category = {
 const Categories = () => {
     const { companyname } = useParams()
 
-    const { data } = useFetch<Category[]>(`https://api.kwick.ng/api/v1/category/${companyname}/`)
+    const { data , isLoading } = useFetch<Category[]>(`https://api.kwick.ng/api/v1/category/${companyname}/`)
 
-
+    if (isLoading) {
+        return (
+            <Loading />
+        )
+    }
     const category = data?.[0]; // Get the first category
     const products = category?.products; // Get products of the first category
 
