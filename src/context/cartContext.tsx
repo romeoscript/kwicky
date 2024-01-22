@@ -10,6 +10,7 @@ interface Product {
     rating: number;
     total: number;
     quantity:number
+    image1:string
   // Add other product properties as needed
 }
 

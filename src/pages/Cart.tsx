@@ -1,6 +1,5 @@
 
 import Layout from '../components/Layout'
-import ProductCard from '../components/ProductCard'
 import cartimg from '../assets/cartimg.png'
 import { Button } from 'antd'
 import { PlusOutlined, MinusOutlined } from '@ant-design/icons';
@@ -15,6 +14,7 @@ interface CartItem {
     rating: number;
     total: number;
     quantity: number;
+    image1: string; 
 }
 
 // Define the type for aggregated cart items
@@ -37,19 +37,20 @@ const Cart = () => {
 
 
 
-    const aggregatedCartItems: Record<number, AggregatedCartItem> = cartItems.reduce((acc: Record<number, AggregatedCartItem>, item: CartItem) => {
+    const initialAccumulator: Record<number, AggregatedCartItem> = {};
+
+    const aggregatedCartItems = cartItems.reduce((acc, item) => {
         if (acc[item.id]) {
-            acc[item.id].quantity += 1;
+            acc[item.id].quantity += 1;  // If the item exists, increment its quantity
         } else {
-            acc[item.id] = { ...item, quantity: 1 };
+            acc[item.id] = { ...item, quantity: 1 };  // Otherwise, add the item with quantity set to 1
         }
         return acc;
-    }, {});
-
+    }, initialAccumulator);
 
     const total = cartItems.reduce((sum, product) => {
 
-        return sum + parseFloat(product?.price); // Directly use price as a number
+        return sum + parseFloat(product?.price.toString()); // Directly use price as a number
     }, 0);
 
 
