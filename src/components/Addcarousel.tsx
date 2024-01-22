@@ -11,8 +11,6 @@ import add3 from '../assets/forphone.png'
 import { useState, useEffect } from 'react';
 
 
-
-
 const responsive = {
 
     desktop: {

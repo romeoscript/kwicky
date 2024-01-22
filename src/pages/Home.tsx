@@ -8,7 +8,8 @@ import useFetch from '../hooks/useFetch';
 import Carousel from 'react-multi-carousel';
 import "react-multi-carousel/lib/styles.css";
 import Loading from '../components/Loading';
-import {  motion } from 'framer-motion';
+import { motion } from 'framer-motion';
+import Special from '../components/Special';
 // Define types for your product and category
 type Product = {
     id: number;
@@ -73,9 +74,9 @@ const Home: React.FC = () => {
 
             {productsByCategory && Object.entries(productsByCategory).map(([category_name, products]) => (
                 <React.Fragment key={category_name}>
-                    <motion.div 
-                        initial="hidden" 
-                        whileInView="visible" 
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
                         variants={fadeIn}
@@ -106,7 +107,7 @@ const Home: React.FC = () => {
                     </motion.div>
                 </React.Fragment>
             ))}
-
+            <Special />
         </Layout>
     );
 };
