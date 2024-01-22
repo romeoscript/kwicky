@@ -12,6 +12,7 @@ import { useScrollto } from './hooks/useScrollto'
 import Categories from './pages/Categories'
 import Cookkiebanner from './components/Cookkiebanner'
 import posthog from 'posthog-js'
+import Error from './components/Error'
 //import { useState, useEffect } from 'react'
 //import Loading from './components/Loading'
 
@@ -48,6 +49,7 @@ function App() {
         <Route path='/product/:id' element={<Productpage />} />
         <Route path='/category/:companyname/:id' element={<Categories />} />
         <Route path='/category/:companyname/' element={<Categories />} />
+        <Route path='*' element={<Error />} />
       </Routes>
       {posthog.has_opted_in_capturing() || posthog.has_opted_out_capturing() ? null : <Cookkiebanner />}
     </>
