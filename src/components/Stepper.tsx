@@ -55,26 +55,26 @@ const Stepper: React.FC = () => {
     useEffect(() => {
         axios.get('https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/states.json')
             .then(response => {
-                const nigeriaStates = response.data.filter(state => state.country_code === 'NG');
+                const nigeriaStates = response.data.filter((state:any) => state.country_code === 'NG');
                 setStates(nigeriaStates);
             })
             .catch(error => console.error('Error fetching states:', error));
 
         axios.get('https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/cities.json')
             .then(response => {
-                const nigeriaCities = response.data.filter(city => city.country_code === 'NG');
+                const nigeriaCities = response.data.filter((city:any) => city.country_code === 'NG');
                 setCities(nigeriaCities);
             })
             .catch(error => console.error('Error fetching cities:', error));
     }, []);
-    const handleStateChange = value => {
+    const handleStateChange = (value:any) => {
         setSelectedState(value);
         console.log(selectedState);
 
     };
 
     // Filtered cities based on the selected state
-    const filteredCities = cities.filter(city => city.state_name === selectedState);
+    const filteredCities = cities.filter((city:any) => city.state_name === selectedState);
 
 
     const aggregatedItems = cartItems.reduce((acc: AggregatedItems, item: Product) => {
@@ -239,7 +239,7 @@ const Stepper: React.FC = () => {
                                                 handleStateChange(value); // Update local component state
                                             }}
                                             placeholder="State"
-                                            options={states.map(state => ({ value: state.name, label: state.name }))}
+                                            options={states.map((state:any) => ({ value: state.name, label: state.name }))}
                                         />
                                     )}
                                 />
@@ -256,7 +256,7 @@ const Stepper: React.FC = () => {
                                             {...field}
                                             className='w-full'
                                             placeholder="City"
-                                            options={filteredCities.map(city => ({ value: city.name, label: city.name }))}
+                                            options={filteredCities.map((city:any) => ({ value: city.name, label: city.name }))}
                                             disabled={!selectedState} // Disable if no state is selected
                                         />
                                     )}
