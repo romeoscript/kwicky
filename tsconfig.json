@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src","paystack-inline-js.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

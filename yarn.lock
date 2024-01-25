@@ -617,6 +617,11 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@paystack/inline-js@^2.14.0":
+  version "2.14.0"
+  resolved "https://registry.yarnpkg.com/@paystack/inline-js/-/inline-js-2.14.0.tgz#03d7bdc24b069cd4b0d8b76ff23c325115756034"
+  integrity sha512-EkOyp6PbF/q+iE8tTfj5Q9XfSWbRG1KarCmb+V9z+zornHdHmJ3XX3tbI1qhP+dxEhC+1CUqbiQKZ+Vt67Xayg==
+
 "@rc-component/color-picker@~1.4.1":
   version "1.4.1"
   resolved "https://registry.npmjs.org/@rc-component/color-picker/-/color-picker-1.4.1.tgz"
@@ -2564,6 +2569,11 @@ react-easy-swipe@^0.0.21:
   integrity sha512-OeR2jAxdoqUMHIn/nS9fgreI5hSpgGoL5ezdal4+oO7YSSgJR8ga+PkYGJrSrJ9MKlPcQjMQXnketrD7WNmNsg==
   dependencies:
     prop-types "^15.5.8"
+
+react-hook-form@^7.49.3:
+  version "7.49.3"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.49.3.tgz#576a4567f8a774830812f4855e89f5da5830435c"
+  integrity sha512-foD6r3juidAT1cOZzpmD/gOKt7fRsDhXXZ0y28+Al1CHgX+AY1qIN9VSIIItXRq1dN68QrRwl1ORFlwjBaAqeQ==
 
 react-icons@^4.12.0:
   version "4.12.0"

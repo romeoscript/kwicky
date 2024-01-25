@@ -4,6 +4,7 @@ import { useMonnifyPayment } from 'react-monnify';
 import Address from './Address';
 import Card from './Card';
 import { useCart } from '../context/cartContext';
+import PaystackPop from '@paystack/inline-js'
 
 
 const steps = [
@@ -14,7 +15,7 @@ const steps = [
     {
         title: 'Second',
         content: <Card />,
-    },
+    }, 
     {
         title: 'Last',
         content: 'Last-content',
