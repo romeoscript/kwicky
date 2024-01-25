@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { message } from 'antd';
-
+import { Modal } from 'antd';
 import { useCart } from '../context/cartContext';
 import PaystackPop from '@paystack/inline-js'
 import { useForm, Controller } from 'react-hook-form';
@@ -42,96 +41,96 @@ type AggregatedItems = Record<string, AggregatedItem>;
 
 
 const Stepper: React.FC = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const { control, handleSubmit } = useForm<FormData>();
-    const { cartItems, clearCart } = useCart()
-    const paystack = new PaystackPop()
+    const { cartItems, clearCart } = useCart();
+    const paystack = new PaystackPop();
     const initialAggregatedItems: AggregatedItems = {};
-    const [states, setStates] = useState([]); // Stores states data
-    const [cities, setCities] = useState([]); // Stores cities data
-    const [selectedState, setSelectedState] = useState(''); // Tracks the selected state
 
-    // Fetch states and cities data
+    const [states, setStates] = useState<any[]>([]);
+    const [cities, setCities] = useState<any[]>([]);
+    const [selectedState, setSelectedState] = useState('');
+    const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
+
     useEffect(() => {
         axios.get('https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/states.json')
             .then(response => {
-                const nigeriaStates = response.data.filter((state:any) => state.country_code === 'NG');
+                const nigeriaStates = response.data.filter((state: any) => state.country_code === 'NG');
                 setStates(nigeriaStates);
             })
             .catch(error => console.error('Error fetching states:', error));
 
         axios.get('https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/cities.json')
             .then(response => {
-                const nigeriaCities = response.data.filter((city:any) => city.country_code === 'NG');
+                const nigeriaCities = response.data.filter((city: any) => city.country_code === 'NG');
                 setCities(nigeriaCities);
             })
             .catch(error => console.error('Error fetching cities:', error));
     }, []);
-    const handleStateChange = (value:any) => {
+
+    const handleStateChange = (value: any) => {
         setSelectedState(value);
         console.log(selectedState);
-
     };
 
-    // Filtered cities based on the selected state
-    const filteredCities = cities.filter((city:any) => city.state_name === selectedState);
-
+    const filteredCities = cities.filter((city: any) => city.state_name === selectedState);
 
     const aggregatedItems = cartItems.reduce((acc: AggregatedItems, item: Product) => {
-        const itemId = item.id.toString(); // Convert the id to string if it's a number
+        const itemId = item.id.toString();
         if (acc[itemId]) {
             acc[itemId].count += 1;
-            acc[itemId].totalPrice += parseFloat(item.price.toString()); // Assuming price is a number here
+            acc[itemId].totalPrice += parseFloat(item.price.toString());
         } else {
-            acc[itemId] = { ...item, count: 1, totalPrice: parseFloat(item.price.toString()) }; // Assuming price is a number here
+            acc[itemId] = { ...item, count: 1, totalPrice: parseFloat(item.price.toString()) };
         }
         return acc;
     }, initialAggregatedItems);
-
 
     const subtotal = Object.values(aggregatedItems).reduce((sum, item) => sum + item.totalPrice, 0);
     const deliveryCost = 0;
     const total = subtotal + deliveryCost;
 
-    const [current, setCurrent] = useState(0);
     const handlePaymentSuccess = async (formData: FormData) => {
-
-        message.success('Payment successful!'); // Display success message
-
+        setIsSuccessModalVisible(true);
         const orderItems = Object.values(aggregatedItems).map(item => ({
-            product: item.id, // Adjust this if your product identifier differs
+            product: item.id,
             quantity: item.count,
             price: item.totalPrice
         }));
 
         const orderData = {
-            full_name: formData.fullname, // Adjust these field names if needed
+            full_name: formData.fullname,
             city: formData.city,
             email: formData.Email,
-            zipcode: "12345", // Add if available or use a default value
-            country: selectedState, // Adjust as per your requirement
+            zipcode: "12345",
+            country: selectedState,
             paid_amount: total,
-            order_number: "NG" + new Date().getTime(), // Create a unique order number
+            order_number: "NG" + new Date().getTime(),
             phone: formData.Phone,
             address: formData.address,
             items: orderItems
         };
+
         try {
-            // Using Axios
             const response = await axios.post('https://api.kwick.ng/api/v1/checkout/', orderData);
-            console.log(response.data); // Handle response data
+            console.log(response.data);
             clearCart();
-            navigate('/cart');
         } catch (error) {
             console.error('Error posting order:', error);
-            // Handle errors (e.g., show error message)
         }
+    };
 
-        // Clear the cart
+    const handleModalOk = () => {
+        setIsSuccessModalVisible(false);
+        navigate('/'); // Navigate to home page
+    };
+
+    const handleModalCancel = () => {
+        setIsSuccessModalVisible(false);
+        navigate('/'); // Navigate to home page
     };
 
     const next = (formData: FormData) => {
-        setCurrent(current + 1)
         paystack.newTransaction({
             key: "pk_test_c8a37742f08f8233439cc38103f44d5b83faee13",
             amount: total * 100,
@@ -140,14 +139,12 @@ const Stepper: React.FC = () => {
             phone: formData.Phone,
             address: formData.address,
             onSuccess: () => handlePaymentSuccess(formData)
-        })
+        });
     };
 
     const onSubmit = (data: FormData) => {
-        console.log(data);
-        next(data)
+        next(data);
     };
-
 
     return (
         <>
@@ -156,7 +153,7 @@ const Stepper: React.FC = () => {
                     <div className='my-[2rem]'>
                         <div className='flex flex-col gap-8'>
                             <div>
-                            <label htmlFor=""> Full name</label>
+                                <label htmlFor=""> Full name</label>
                                 <Controller
                                     name="fullname"
                                     control={control}
@@ -173,7 +170,7 @@ const Stepper: React.FC = () => {
                                 />
                             </div>
                             <div>
-                            <label htmlFor=""> Email</label>
+                                <label htmlFor=""> Email</label>
                                 <Controller
                                     name="Email"
                                     control={control}
@@ -190,7 +187,7 @@ const Stepper: React.FC = () => {
                                 />
                             </div>
                             <div>
-                            <label htmlFor=""> Phone</label>
+                                <label htmlFor=""> Phone</label>
                                 <Controller
                                     name="Phone"
                                     control={control}
@@ -207,7 +204,7 @@ const Stepper: React.FC = () => {
                             </div>
 
                             <div>
-                            <label htmlFor=""> Address</label>
+                                <label htmlFor=""> Address</label>
                                 <Controller
                                     name="address"
                                     control={control}
@@ -239,14 +236,14 @@ const Stepper: React.FC = () => {
                                                 handleStateChange(value); // Update local component state
                                             }}
                                             placeholder="State"
-                                            options={states.map((state:any) => ({ value: state.name, label: state.name }))}
+                                            options={states.map((state: any) => ({ value: state.name, label: state.name }))}
                                         />
                                     )}
                                 />
 
                             </div>
                             <div>
-                            <label htmlFor=""> City</label>
+                                <label htmlFor=""> City</label>
                                 <Controller
                                     name="city"
                                     control={control}
@@ -256,7 +253,7 @@ const Stepper: React.FC = () => {
                                             {...field}
                                             className='w-full'
                                             placeholder="City"
-                                            options={filteredCities.map((city:any) => ({ value: city.name, label: city.name }))}
+                                            options={filteredCities.map((city: any) => ({ value: city.name, label: city.name }))}
                                             disabled={!selectedState} // Disable if no state is selected
                                         />
                                     )}
@@ -289,6 +286,32 @@ const Stepper: React.FC = () => {
 
 
             </form>
+
+            <Modal
+                title="Success"
+                visible={isSuccessModalVisible}
+                onOk={handleModalOk}
+                onCancel={handleModalCancel}
+                okText="Go to Home"
+            >
+                <div className="bg-white p-6 md:mx-auto">
+                    <svg viewBox="0 0 24 24" className="text-green-600 w-16 h-16 mx-auto my-6">
+                        <path fill="currentColor"
+                            d="M12,0A12,12,0,1,0,24,12,12.014,12.014,0,0,0,12,0Zm6.927,8.2-6.845,9.289a1.011,1.011,0,0,1-1.43.188L5.764,13.769a1,1,0,1,1,1.25-1.562l4.076,3.261,6.227-8.451A1,1,0,1,1,18.927,8.2Z">
+                        </path>
+                    </svg>
+                    <div className="text-center">
+                        <h3 className="md:text-2xl text-base text-gray-900 font-semibold text-center">Payment Done!</h3>
+                        <p className="text-gray-600 my-2">Thank you for completing your secure online payment.</p>
+                        <p>Have a great day!</p>
+                        <div className="py-10 text-center">
+                            <button onClick={handleModalCancel} className="px-12 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3">
+                                OK
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </Modal>
         </>
     );
 };
