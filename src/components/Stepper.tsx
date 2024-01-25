@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { Button, message, Steps } from 'antd';
+import { message } from 'antd';
 
 import { useCart } from '../context/cartContext';
 import PaystackPop from '@paystack/inline-js'
 import { useForm, Controller } from 'react-hook-form';
 import { Select, Input } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 
 
 
 const Stepper: React.FC = () => {
-
+const navigate = useNavigate()
     interface FormData {
         fullname: string;
         Email: string;
@@ -72,14 +73,16 @@ const Stepper: React.FC = () => {
     const [current, setCurrent] = useState(0);
     const handlePaymentSuccess = () => {
         clearCart(); // Clear the cart
-        message.success('Payment successful!'); // Display success message
+        message.success('Payment successful!');
+        navigate('/cart')
+         // Display success message
         // You can also navigate the user to a different page if needed
     };
 
     const next = (formData:FormData) => {
         setCurrent(current + 1)
         paystack.newTransaction({
-            key: "pk_test_c8a37742f08f8233439cc38103f44d5b83faee13",
+            key: "pk_live_fe190e51a0efed431b5666cb2ec4f9df50dbbd19",
             amount: total * 100,
             email: formData.Email,
 
