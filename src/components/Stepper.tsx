@@ -19,13 +19,34 @@ const Stepper: React.FC = () => {
         state: string;
         Phone: string;
     }
+    interface Product {
+        id: number;
+        name: string;
+        img: string;
+        price: number;
+        rating: number;
+        total: number;
+        quantity: number;
+        image1: string;
+    }
+    
 
     interface CartItem {
         id: string;
         name: string;
         price: string;
         image1: string;
+
     }
+
+    interface AggregatedItem extends Product {
+        count: number;
+        totalPrice: number;
+    }
+    
+    type AggregatedItems = Record<string, AggregatedItem>;
+    
+    
     const { control, handleSubmit } = useForm<FormData>();
 
 
@@ -34,17 +55,19 @@ const Stepper: React.FC = () => {
     const { cartItems,clearCart} = useCart()
     const paystack = new PaystackPop()
 
-    console.log(cartItems);
+    const initialAggregatedItems: AggregatedItems = {};
 
-    const aggregatedItems: Record<string, CartItem & { count: number; totalPrice: number }> = cartItems.reduce((acc, item) => {
-        if (acc[item.id]) {
-            acc[item.id].count += 1;
-            acc[item.id].totalPrice += parseFloat(item.price); // Convert price to a number
+    const aggregatedItems = cartItems.reduce((acc: AggregatedItems, item: Product) => {
+        const itemId = item.id.toString(); // Convert the id to string if it's a number
+        if (acc[itemId]) {
+            acc[itemId].count += 1;
+            acc[itemId].totalPrice += item.price; // Assuming price is a number here
         } else {
-            acc[item.id] = { ...item, count: 1, totalPrice: parseFloat(item.price) }; // Convert price to a number
+            acc[itemId] = { ...item, count: 1, totalPrice: item.price }; // Assuming price is a number here
         }
         return acc;
-    }, {});
+    }, initialAggregatedItems);
+    
 
     const subtotal = Object.values(aggregatedItems).reduce((sum, item) => sum + item.totalPrice, 0);
     const deliveryCost = 0; // Modify this if there's a delivery cost
