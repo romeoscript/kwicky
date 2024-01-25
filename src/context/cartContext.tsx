@@ -20,15 +20,14 @@ interface CartContextType {
   addToCart: (product: Product) => void;
   removeFromCart: (product: Product) => void;
   decreaseQuantity: (product: Product) => void;
+  clearCart: () => void; // Add the clearCart method
 }
 
-// Create the context with a default value
-const CartContext = createContext<CartContextType>({ cartItems: [], addToCart: () => {}, removeFromCart: () => {},decreaseQuantity: () => {} });
+const CartContext = createContext<CartContextType>({ cartItems: [], addToCart: () => {}, removeFromCart: () => {},decreaseQuantity: () => {}, clearCart:()=>{} });
 
 // Custom hook for using the cart context
 export const useCart = () => useContext(CartContext);
 
-// CartProvider component with TypeScript
 interface CartProviderProps {
   children: ReactNode;
 }
@@ -50,6 +49,10 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     setCartItems(cartItems.filter(item => item.id !== product.id));
 
   }
+  const clearCart = () => {
+    setCartItems([]); // Clear the cart items
+    localStorage.setItem('cartItems', JSON.stringify([])); // Also clear the cartItems from localStorage
+  };
 
 
   const decreaseQuantity = (product: Product) => {
@@ -74,7 +77,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, decreaseQuantity }}>
+    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, decreaseQuantity, clearCart }}>
       {children}
     </CartContext.Provider>
   );
