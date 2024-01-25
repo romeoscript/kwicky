@@ -6,6 +6,7 @@ import PaystackPop from '@paystack/inline-js'
 import { useForm, Controller } from 'react-hook-form';
 import { Select, Input } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 
 
@@ -71,22 +72,53 @@ const navigate = useNavigate()
     console.log(total);
 
     const [current, setCurrent] = useState(0);
-    const handlePaymentSuccess = () => {
-        clearCart(); // Clear the cart
-        message.success('Payment successful!');
-        navigate('/cart')
-         // Display success message
-        // You can also navigate the user to a different page if needed
+    const handlePaymentSuccess = async (formData:FormData) => {
+        //clearCart(); // Clear the cart
+        message.success('Payment successful!'); // Display success message
+    
+        const orderItems = Object.values(aggregatedItems).map(item => ({
+            product: item.id, // Adjust this if your product identifier differs
+            quantity: item.count,
+            price: item.totalPrice
+        }));
+    
+        const orderData = {
+            full_name: formData.fullname, // Adjust these field names if needed
+            city: formData.city,
+            email: formData.Email,
+            zipcode: "12345", // Add if available or use a default value
+            country: formData.state, // Adjust as per your requirement
+            paid_amount: total,
+            order_number: "NG" + new Date().getTime(), // Create a unique order number
+            phone: formData.Phone,
+            address: formData.address,
+            items: orderItems
+        };
+    
+        try {
+            // Using Axios
+            const response = await axios.post('https://api.kwick.ng/api/v1/checkout/', orderData);
+            console.log(response.data); // Handle response data
+            clearCart();
+            navigate('/cart');
+        } catch (error) {
+            console.error('Error posting order:', error);
+            // Handle errors (e.g., show error message)
+        }
+
+        // Clear the cart
     };
 
     const next = (formData:FormData) => {
         setCurrent(current + 1)
         paystack.newTransaction({
-            key: "pk_live_fe190e51a0efed431b5666cb2ec4f9df50dbbd19",
+            key: "pk_test_c8a37742f08f8233439cc38103f44d5b83faee13",
             amount: total * 100,
             email: formData.Email,
-
-            onSuccess:() => handlePaymentSuccess()
+            name:formData.fullname,
+            phone: formData.Phone,
+            address: formData.address,
+            onSuccess:() => handlePaymentSuccess(formData)
         })
     };
 
@@ -150,42 +182,23 @@ const navigate = useNavigate()
                                 )}
                             />
                             </div>
+
                             <div>
                                 <Controller
                                     name="address"
                                     control={control}
                                     defaultValue=""
                                     render={({ field }) => (
-                                        <Select
-                                            {...field}
-                                            className='w-full '
-                                            placeholder="Address"
-                                            options={[
-                                                { value: 'jack', label: 'Jack' },
-                                                { value: 'lucy', label: 'Lucy' },
-                                                { value: 'Yiminghe', label: 'yiminghe' },
-                                                { value: 'disabled', label: 'Disabled', disabled: true },
-                                            ]}
-                                        />
-                                    )}
-                                />
-
-                            </div>
-                            <div>
-                                <Controller
-                                    name="city"
-                                    control={control}
-                                    defaultValue=""
-                                    render={({ field }) => (
                                         <Input
                                             {...field}
-                                            placeholder="City"
+                                            placeholder="address"
                                             className='p-[0.5rem]'
                                             allowClear
                                         />
                                     )}
                                 />
                             </div>
+
                             <div >
                                 <Controller
                                     name="state"
@@ -207,6 +220,29 @@ const navigate = useNavigate()
                                     )}
                                 />
                             </div>
+                            <div>
+                                <Controller
+                                    name="city"
+                                    control={control}
+                                    defaultValue=""
+                                    render={({ field }) => (
+                                        <Select
+                                            {...field}
+                                            className='w-full '
+                                            placeholder="city"
+                                            options={[
+                                                { value: 'jack', label: 'Jack' },
+                                                { value: 'lucy', label: 'Lucy' },
+                                                { value: 'Yiminghe', label: 'yiminghe' },
+                                                { value: 'disabled', label: 'Disabled', disabled: true },
+                                            ]}
+                                        />
+                                    )}
+                                />
+
+                            </div>
+                       
+                    
                          
 
                         </div>
