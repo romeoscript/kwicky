@@ -31,13 +31,7 @@ const Stepper: React.FC = () => {
     }
     
 
-    interface CartItem {
-        id: string;
-        name: string;
-        price: string;
-        image1: string;
 
-    }
 
     interface AggregatedItem extends Product {
         count: number;
@@ -61,9 +55,9 @@ const Stepper: React.FC = () => {
         const itemId = item.id.toString(); // Convert the id to string if it's a number
         if (acc[itemId]) {
             acc[itemId].count += 1;
-            acc[itemId].totalPrice += item.price; // Assuming price is a number here
+            acc[itemId].totalPrice += parseFloat(item.price.toString()) ; // Assuming price is a number here
         } else {
-            acc[itemId] = { ...item, count: 1, totalPrice: item.price }; // Assuming price is a number here
+            acc[itemId] = { ...item, count: 1, totalPrice: parseFloat(item.price.toString()) }; // Assuming price is a number here
         }
         return acc;
     }, initialAggregatedItems);
