@@ -107,7 +107,7 @@ const Home: React.FC = () => {
                     </motion.div>
                 </React.Fragment>
             ))}
-            <Special />
+            {/* <Special /> */}
         </Layout>
     );
 };
