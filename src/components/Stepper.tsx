@@ -132,7 +132,7 @@ const Stepper: React.FC = () => {
 
     const next = (formData: FormData) => {
         paystack.newTransaction({
-            key: "pk_test_c8a37742f08f8233439cc38103f44d5b83faee13",
+            key: "pk_live_fe190e51a0efed431b5666cb2ec4f9df50dbbd19",
             amount: total * 100,
             email: formData.Email,
             name: formData.fullname,
