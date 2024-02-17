@@ -9,7 +9,7 @@ import Carousel from 'react-multi-carousel';
 import "react-multi-carousel/lib/styles.css";
 import Loading from '../components/Loading';
 import { motion } from 'framer-motion';
-import Special from '../components/Special';
+// import Special from '../components/Special';
 // Define types for your product and category
 type Product = {
     id: number;
